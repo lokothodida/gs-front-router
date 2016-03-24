@@ -5,7 +5,7 @@ desired URL structures and route actions without modifying any `.htaccess` files
 
 # Requirements
 * PHP 5.3+
-* [GetSimple CMS 3.3.8+](https://gitub.com/GetSimpleCMS/GetSimpleCMS)
+* [GetSimple CMS 3.3.7+](https://gitub.com/GetSimpleCMS/GetSimpleCMS)
 
 # Screenshots
 ![screenshot of admin panel](https://cloud.githubusercontent.com/assets/4363863/14022767/31a5b174-f1d9-11e5-9d55-d69679ef82bd.png)
@@ -24,14 +24,14 @@ desired URL structures and route actions without modifying any `.htaccess` files
 3. Add, edit and delete your routes.
 4. Visit a URL on your site that matches the pattern to test your route.
 
-Check out the [wiki](wiki) for more information.
+Check out the [wiki](/wiki) for more information.
 
 # Examples
-* [Disqus (Comments-Only page)](wiki/Disqus-Comments-Only-Example)
-* [Gallery (i18n Gallery)](wiki/Gallery-(i18n-Gallery)-Example)
-* [Blog (i18n Special Pages)](wiki/Blog-(i18n-Special-Pages)-Example)
-* [Catalog (i18n Special Pages)](wiki/Catalog-(i18n-Special-Pages)-Example)
-* [File listing](wiki/File-Listing-Example)
+* [Disqus (Comments-Only page)](/wiki/Disqus-Comments-Only-Example)
+* [Gallery (i18n Gallery)](/wiki/Gallery-(i18n-Gallery)-Example)
+* [Blog (i18n Special Pages)](/wiki/Blog-(i18n-Special-Pages)-Example)
+* [Catalog (i18n Special Pages)](/wiki/Catalog-(i18n-Special-Pages)-Example)
+* [File listing](/wiki/File-Listing-Example)
 
 # Wiki
 Full examples and documentation are available on the [wiki](wiki). Contributions are welcome.
