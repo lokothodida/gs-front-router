@@ -24,17 +24,17 @@ desired URL structures and route actions without modifying any `.htaccess` files
 3. Add, edit and delete your routes.
 4. Visit a URL on your site that matches the pattern to test your route.
 
-Check out the [wiki](/wiki) for more information.
+Check out the [wiki](https://github.com/gs-front-router/wiki) for more information.
 
 # Examples
-* [Disqus (Comments-Only page)](/wiki/Disqus-Comments-Only-Example)
-* [Gallery (i18n Gallery)](/wiki/Gallery-(i18n-Gallery)-Example)
-* [Blog (i18n Special Pages)](/wiki/Blog-(i18n-Special-Pages)-Example)
-* [Catalog (i18n Special Pages)](/wiki/Catalog-(i18n-Special-Pages)-Example)
-* [File listing](/wiki/File-Listing-Example)
+* [Disqus (Comments-Only page)](https://github.com/gs-front-router/wiki/Disqus-Comments-Only-Example)
+* [Gallery (i18n Gallery)](https://github.com/gs-front-router/wiki/Gallery-(i18n-Gallery)-Example)
+* [Blog (i18n Special Pages)](https://github.com/gs-front-router/wiki/Blog-(i18n-Special-Pages)-Example)
+* [Catalog (i18n Special Pages)](https://github.com/gs-front-router/wiki/Catalog-(i18n-Special-Pages)-Example)
+* [File listing](https://github.com/gs-front-router/wiki/File-Listing-Example)
 
 # Wiki
-Full examples and documentation are available on the [wiki](wiki). Contributions are welcome.
+Full examples and documentation are available on the [wiki](https://github.com/gs-front-router/wiki). Contributions are welcome.
 
 # License
 GetSimple Front Router is licensed under [MIT](http://www.opensource.org/licenses/MIT).
