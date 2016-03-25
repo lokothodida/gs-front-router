@@ -32,7 +32,7 @@ call_user_func(function() {
 
 // activate actions/filters
   // front-end
-  add_action('error-404',  function() {
+  add_action('index-post-dataindex',  function() {
     executeRoutes();
   });
 
