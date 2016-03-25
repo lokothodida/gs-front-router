@@ -7,16 +7,17 @@ desired URL structures and route actions without modifying any `.htaccess` files
 * PHP 5.3+
 * [GetSimple CMS 3.3.7+](https://gitub.com/GetSimpleCMS/GetSimpleCMS)
 
-# Screenshots
-![screenshot of admin panel](https://cloud.githubusercontent.com/assets/4363863/14022767/31a5b174-f1d9-11e5-9d55-d69679ef82bd.png)
-
-![screenshot of successful route](https://cloud.githubusercontent.com/assets/4363863/14022765/3181d7e0-f1d9-11e5-8517-1722c0d1527b.png)
-
 # Features
 * Dynamically choose page content based on URL
 * Easily create error pages for specific page types
 * Pull together functionality from other plugins and display your own page content
-* Easily create front page routes for your own plugins
+* Create front page routes for your own plugins
+* Available in English, Italian, French, German and Russian
+
+# Screenshots
+![screenshot of admin panel](https://cloud.githubusercontent.com/assets/4363863/14022767/31a5b174-f1d9-11e5-9d55-d69679ef82bd.png)
+
+![screenshot of successful route](https://cloud.githubusercontent.com/assets/4363863/14022765/3181d7e0-f1d9-11e5-8517-1722c0d1527b.png)
 
 # Getting Started
 1. Install and enable the plugin.

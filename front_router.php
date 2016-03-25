@@ -20,7 +20,7 @@ call_user_func(function() {
   call_user_func_array('register_plugin', array(
     'id'      => ID,
     'name'    => i18n_r('PLUGIN_NAME'),
-    'version' => '0.1',
+    'version' => '0.2',
     'author'  => 'Lawrence Okoth-Odida',
     'url'     => 'https://github.com/lokothodida',
     'desc'    => i18n_r('PLUGIN_DESC'),
@@ -32,10 +32,13 @@ call_user_func(function() {
 
 // activate actions/filters
   // front-end
-  add_action('error-404',  function() {
+  // route execution
+  add_action('index-post-dataindex',  function() {
     executeRoutes();
   });
 
   // back-end
-  add_action('plugins-sidebar', 'createSideMenu' , array(ID, i18n_r('PLUGIN_SIDEBAR'))); // sidebar link
+  // sidebar link
+  add_action('plugins-sidebar', 'createSideMenu' , array(ID, i18n_r('MANAGE_ROUTES')));
+
 });

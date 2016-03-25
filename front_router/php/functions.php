@@ -98,20 +98,20 @@ function init() {
   // Ensure the folder is created
   if (!file_exists(DATAPATH)) {
     if (!mkdir(DATAPATH, 0755)) {
-      $succ['folder'] = 'MKDIR_ERROR';
+      $succ['folder'] = i18n_r('MKDIR_ERROR', array('%folder%' => 'data/other/front_router'));
     }
   }
 
   // Ensure the htaccess file is created
   if (!file_exists(DATAHTACCESSFILE)) {
     if(!file_put_contents(DATAHTACCESSFILE, 'Deny from all')) {
-      $succ['htaccess'] = 'HTACCESS_ERROR';
+      $succ['htaccess'] = i18n_r('HTACCESS_ERROR', array('%htaccess%' => 'data/other/front_router/.htaccess'));
     }
   }
 
   // Ensure that the core file is created
   if (!file_exists(DATAROUTESFILE) && !saveRoutes(array())) {
-    $succ['file'] = 'INIT_ROUTE_ERROR';
+    $succ['file'] = i18n_r('INIT_ROUTE_ERROR');
   }
 
   return $succ;
