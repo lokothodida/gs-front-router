@@ -141,8 +141,7 @@ function executeRoutes() {
   foreach ($routes as $route => $callback) {
     // http://upshots.org/php/php-seriously-simple-router
     // Turn the route string into a valid regex
-    $suffix = '(\/*)';
-    $pattern = '/^' . str_replace('/', '\/', $route) . $suffix . '$/';
+    $pattern = '/^' . str_replace('/', '\/', $route) . '$/';
 
     // If the pattern matches, run the callback and pass in the parameters
     $match = @preg_match($pattern, $url, $params);
@@ -210,5 +209,13 @@ function getURL($root = false) {
   $url = strstr($url, '//');
   $root = $root ? strstr($root, '//') : '';
 
-  return str_replace($root, '', $url);
+  // Shave off the root
+  $url = str_replace($root, '', $url);
+
+  // Shave off trailing slashes and double slashes
+  $url = ltrim($url, '/');
+  $url = rtrim($url, '/');
+  $url = preg_replace('~/+~', '/', $url); // http://stackoverflow.com/questions/2217759/regular-expression-replace-multiple-slashes-with-only-one
+
+  return $url;
 }
