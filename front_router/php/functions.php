@@ -185,10 +185,17 @@ function executeRoutes() {
   //return $data_index;
 }
 
+// Gets the root URL
+function getRootURL() {
+  $pretty  = (string) $GLOBALS['PRETTYURLS'];
+  $root    = $GLOBALS['SITEURL'] . (empty($pretty) ? 'index.php' : null);
+  return $root;
+}
+
 // Get URL relative to the domain
 function getRelativeURL() {
   $pretty  = (string) $GLOBALS['PRETTYURLS'];
-  $root    = $GLOBALS['SITEURL'] . (empty($pretty) ? 'index.php?id=' : null);
+  $root    = getRootURL() . (empty($pretty) ? '?id=' : null);
 
   return getURL($root);
 }
