@@ -20,7 +20,7 @@ call_user_func(function() {
   call_user_func_array('register_plugin', array(
     'id'      => ID,
     'name'    => i18n_r('PLUGIN_NAME'),
-    'version' => '0.2',
+    'version' => '0.3',
     'author'  => 'Lawrence Okoth-Odida',
     'url'     => 'https://github.com/lokothodida',
     'desc'    => i18n_r('PLUGIN_DESC'),
