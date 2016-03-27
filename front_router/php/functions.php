@@ -141,7 +141,8 @@ function executeRoutes() {
   foreach ($routes as $route => $callback) {
     // http://upshots.org/php/php-seriously-simple-router
     // Turn the route string into a valid regex
-    $pattern = '/^' . str_replace('/', '\/', $route) . '$/';
+    $suffix = '(\/*)';
+    $pattern = '/^' . str_replace('/', '\/', $route) . $suffix . '$/';
 
     // If the pattern matches, run the callback and pass in the parameters
     $match = @preg_match($pattern, $url, $params);
