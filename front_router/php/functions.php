@@ -187,7 +187,10 @@ function executeRoutes() {
 
 // Get URL relative to the domain
 function getRelativeURL() {
-  return getURL((string) $GLOBALS['SITEURL']);
+  $pretty  = (string) $GLOBALS['PRETTYURLS'];
+  $root    = $GLOBALS['SITEURL'] . (empty($pretty) ? 'index.php?id=' : null);
+
+  return getURL($root);
 }
 
 // Get the full URL
