@@ -9,10 +9,12 @@ desired URL structures and route actions without modifying any `.htaccess` files
 
 # Features
 * Dynamically choose page content based on URL
+* Great for improving SEO for your site by having informative site URLs
 * Easily create error pages for specific page types
-* Pull together functionality from other plugins and display your own page content
+* Conjoin functionality from other plugins and display your own page content
 * Create front page routes for your own plugins
 * Available in English, Italian, French, German and Russian
+* Works with and without [Fancy/Pretty URLS](http://get-simple.info/wiki/how_to:website_settings) enabled (v0.3+)
 
 # Screenshots
 ![screenshot of admin panel](https://cloud.githubusercontent.com/assets/4363863/14022767/31a5b174-f1d9-11e5-9d55-d69679ef82bd.png)
@@ -34,11 +36,16 @@ Check out the [wiki](https://github.com/lokothodida/gs-front-router/wiki) for mo
 * [Catalog (i18n Special Pages)](https://github.com/lokothodida/gs-front-router/wiki/Catalog-(i18n-Special-Pages)-Example)
 * [File listing](https://github.com/lokothodida/gs-front-router/wiki/File-Listing-Example)
 
+More examples in the [wiki](https://github.com/lokothodida/gs-front-router/wiki).
+
 # Wiki
-Full examples and documentation are available on the [wiki](https://github.com/lokothodida/gs-front-router/wiki). Contributions are welcome.
+Documentation, API, tutorials and contribution guidelines are all available on the [wiki](https://github.com/lokothodida/gs-front-router/wiki). Contributions are welcome.
 
 # License
 GetSimple Front Router is licensed under [MIT](http://www.opensource.org/licenses/MIT).
+
+# Contributers
+* [dimayakovlev](https://github.com/dimayakovlev) - Russian translation
 
 # Copyright
 All rights reserved.

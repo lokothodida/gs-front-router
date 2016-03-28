@@ -184,9 +184,19 @@ function executeRoutes() {
   //return $data_index;
 }
 
+// Gets the root URL
+function getRootURL() {
+  $pretty  = (string) $GLOBALS['PRETTYURLS'];
+  $root    = $GLOBALS['SITEURL'] . (empty($pretty) ? 'index.php' : null);
+  return $root;
+}
+
 // Get URL relative to the domain
 function getRelativeURL() {
-  return getURL((string) $GLOBALS['SITEURL']);
+  $pretty  = (string) $GLOBALS['PRETTYURLS'];
+  $root    = getRootURL() . (empty($pretty) ? '?id=' : null);
+
+  return getURL($root);
 }
 
 // Get the full URL
@@ -199,5 +209,13 @@ function getURL($root = false) {
   $url = strstr($url, '//');
   $root = $root ? strstr($root, '//') : '';
 
-  return str_replace($root, '', $url);
+  // Shave off the root
+  $url = str_replace($root, '', $url);
+
+  // Shave off trailing slashes and double slashes
+  $url = ltrim($url, '/');
+  $url = rtrim($url, '/');
+  $url = preg_replace('~/+~', '/', $url); // http://stackoverflow.com/questions/2217759/regular-expression-replace-multiple-slashes-with-only-one
+
+  return $url;
 }
