@@ -25,17 +25,13 @@ call_user_func(function() {
     'url'     => 'https://github.com/lokothodida',
     'desc'    => i18n_r('PLUGIN_DESC'),
     'tab'     => 'plugins',
-    'admin'   => function() {
-      admin();
-    }
+    'admin'   => 'FrontRouterPlugin\admin'
   ));
 
 // activate actions/filters
   // front-end
   // route execution
-  add_action('index-post-dataindex',  function() {
-    executeRoutes();
-  });
+  add_action('index-post-dataindex',  'FrontRouterPlugin\executeRoutes');
 
   // back-end
   // sidebar link
