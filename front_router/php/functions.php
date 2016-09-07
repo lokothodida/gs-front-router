@@ -117,14 +117,28 @@ function init() {
   return $succ;
 }
 
-// Execute the routes
-function executeRoutes() {
-  global $data_index;
+/**
+ * for  GS v < 3.4
+ * get an empty gs xml page object
+ */
+if(!function_exists('\getPageObject')){
+  function getPageObject(){
+    $xml = new \SimpleXMLExtended('<?xml version="1.0" encoding="UTF-8"?><item></item>');
+    $pagefields = array('title','pubDate','meta','metad','url','content','parent','template','private');
+    foreach($pagefields as $field){
+      $xml->$field = null;
+    }
+    return $xml;  
+  }
+}
 
-  $routes = array();
-  $data = false;
+// Execute the routes
+function executeRoutes($data_index) {
+
+  $routes  = array();
+  $data    = array();
   $matched = false;
-  $url = getRelativeURL();
+  $url     = getRelativeURL();
 
   // Check saved routes
   $saved = getSavedRoutes();
@@ -137,6 +151,8 @@ function executeRoutes() {
   $routes = array_merge($routes, $registered);
 
   ob_start();
+  // @todo why start buffering here, if we are only allowing 1 match?
+
   // Select a matching route
   foreach ($routes as $route => $callback) {
     // http://upshots.org/php/php-seriously-simple-router
@@ -159,29 +175,35 @@ function executeRoutes() {
         };
       }
 
-      $data = call_user_func_array($cb, $params);
+      $data = (object) call_user_func_array($cb, $params);
       $matched = true;
       break;
     }
   }
 
-  // Finally set the page contents
+  // Finally set the page data contents from return array, and collect buffer and save to content
   if ($matched) {
-    // title
-    if (isset($data['title'])) {
-      $data_index->title = $data['title'];
+    // route match
+    
+    if(!$data_index) $data_index = getPageObject();
+    
+    if($data){
+      // callback has return data
+      $data_index = (object) array_merge((array) $data_index, (array) $data); 
     }
 
-    // content
-    if (isset($data['content'])) {
-      call_user_func_array($data['content'], $params);
-    }
+      // support for content callables, so user can get arguments
+      // if content is callable, or content is null, save buffer to content
+      if(is_callable($data->content) || is_null($data->content)){
+        if(is_callable($data->content)) call_user_func_array($data->content,$params);
 
-    $data_index->content = ob_get_contents();
+        $buffer  = ob_get_contents();
+        if($buffer) $data_index->content = $buffer;
+      }
   }
 
   ob_end_clean();
-  //return $data_index;
+  return $data_index;  
 }
 
 // Gets the root URL
