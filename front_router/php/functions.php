@@ -117,14 +117,27 @@ function init() {
   return $succ;
 }
 
-// Execute the routes
-function executeRoutes() {
-  global $data_index;
+// Get an empty GS xml page object (for  GS v < 3.4)
+if (!function_exists('\getPageObject')) {
+  function getPageObject() {
+    $xml = new \SimpleXMLExtended('<?xml version="1.0" encoding="UTF-8"?><item></item>');
+    $pagefields = array('title','pubDate','meta','metad','url','content','parent','template','private');
 
-  $routes = array();
-  $data = false;
+    foreach ($pagefields as $field) {
+      $xml->$field = null;
+    }
+
+    return $xml;
+  }
+}
+
+// Execute the routes
+function executeRoutes($data_index) {
+
+  $routes  = array();
+  $data    = array();
   $matched = false;
-  $url = getRelativeURL();
+  $url     = getRelativeURL();
 
   // Check saved routes
   $saved = getSavedRoutes();
@@ -136,7 +149,6 @@ function executeRoutes() {
   $registered = Router::getRegisteredRoutes();
   $routes = array_merge($routes, $registered);
 
-  ob_start();
   // Select a matching route
   foreach ($routes as $route => $callback) {
     // http://upshots.org/php/php-seriously-simple-router
@@ -159,29 +171,45 @@ function executeRoutes() {
         };
       }
 
-      $data = call_user_func_array($cb, $params);
+      $data = (object) call_user_func_array($cb, $params);
       $matched = true;
       break;
     }
   }
 
-  // Finally set the page contents
+  // Start output buffering
+  ob_start();
+
+  // Finally set the page data contents from return array, and collect buffer and save to content
   if ($matched) {
-    // title
-    if (isset($data['title'])) {
-      $data_index->title = $data['title'];
+    // route match
+
+    if (!$data_index) {
+      $data_index = getPageObject();
     }
 
-    // content
-    if (isset($data['content'])) {
-      call_user_func_array($data['content'], $params);
+    if ($data) {
+      // callback has return data
+      $data_index = (object) array_merge((array) $data_index, (array) $data);
     }
 
-    $data_index->content = ob_get_contents();
+    // support for content callables, so user can get arguments
+    // if content is callable, or content is null, save buffer to content
+    if (is_callable($data->content) || is_null($data->content)) {
+      if (is_callable($data->content)) {
+        call_user_func_array($data->content,$params);
+      }
+
+      $buffer  = ob_get_contents();
+
+      if ($buffer) {
+        $data_index->content = $buffer;
+      }
+    }
   }
 
   ob_end_clean();
-  //return $data_index;
+  return $data_index;
 }
 
 // Gets the root URL
@@ -202,7 +230,7 @@ function getRelativeURL() {
 // Get the full URL
 function getURL($root = false) {
   // https://css-tricks.com/snippets/php/get-current-page-url/
-  $url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://'.$_SERVER["SERVER_NAME"] :  'https://'.$_SERVER["SERVER_NAME"];
+  $url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://' . $_SERVER["SERVER_NAME"] :  'https://' . $_SERVER["SERVER_NAME"];
   $url .= $_SERVER["REQUEST_URI"];
 
   // Remove http/https from the current url and root
