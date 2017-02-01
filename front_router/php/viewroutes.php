@@ -1,5 +1,3 @@
-<?php namespace FrontRouterPlugin; ?>
-
 <!--css-->
 <link rel="stylesheet" href="<?php echo $css['codemirror']; ?>">
 <style>
@@ -23,9 +21,9 @@
   }
 </style>
 
-<h3 class="floated"><?php i18n('MANAGE_ROUTES'); ?></h3>
+<h3 class="floated"><?php FrontRouter::i18n('MANAGE_ROUTES'); ?></h3>
 <nav class="edit-nav clearfix">
-  <a href="#" class="addroute"><?php i18n('ADD_ROUTE'); ?></a>
+  <a href="#" class="addroute"><?php FrontRouter::i18n('ADD_ROUTE'); ?></a>
 </nav>
 
 <form method="post" class="routeform">
@@ -36,7 +34,7 @@
   </div>
 
   <p id="submit_line">
-    <input type="submit" class="submit" name="save" value="<?php \i18n('BTN_SAVECHANGES'); ?>">
+    <input type="submit" class="submit" name="save" value="<?php i18n('BTN_SAVECHANGES'); ?>">
   </p>
 </form>
 
@@ -83,7 +81,7 @@
     $('.routeform').on('click', '.deleteroute', function(evt) {
       var $route = $(evt.target).closest('.route');
       var route = $route.find('input').val();
-      var status = confirm(<?php echo json_encode(i18n_r('DELETE_ROUTE_SURE')); ?>.replace('%route%', route));
+      var status = confirm(<?php echo json_encode(FrontRouter::i18n_r('DELETE_ROUTE_SURE')); ?>.replace('%route%', route));
 
       if (status) {
         $route.remove();
