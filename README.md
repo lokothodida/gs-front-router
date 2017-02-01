@@ -4,7 +4,7 @@ URL. Designed to be used in conjunction with other plugins in order to build
 desired URL structures and route actions without modifying any `.htaccess` files.
 
 # Requirements
-* PHP 5.3+
+* PHP 5.2.3+ (for Front Router v0.4.1+)
 * [GetSimple CMS 3.3.7+](https://gitub.com/GetSimpleCMS/GetSimpleCMS)
 
 # Features

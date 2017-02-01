@@ -161,6 +161,17 @@ class FrontRouter {
     $matched = false;
     $url     = self::getRelativeURL();
 
+    // Remove the query from the url
+    $parsedUrl = parse_url($url);
+
+    // @todo - should this only be done for pretty urls??
+    if (@$parsedUrl['query']) {
+      $url = str_replace('?' . $parsedUrl['query'], '', $url);
+    }
+
+    // Remove any trailing slashes
+    $url = rtrim($url, '/');
+
     // Check saved routes
     $saved = self::getSavedRoutes();
     $routes = array_merge($routes, $saved);
@@ -186,11 +197,9 @@ class FrontRouter {
         // Ensure we have a valid callback
         if (is_callable($callback)) {
           $cb = $callback;
-        } else {
-          $cb = function() use ($callback) {
-            $args = func_get_args();
-            return eval('?>' . $callback);
-          };
+        } elseif (is_string($callback)) {
+          // Create a callable
+          $cb = create_function('', '$args = func_get_args(); ?>' . $callback);
         }
 
         $data = (object) call_user_func_array($cb, $params);
