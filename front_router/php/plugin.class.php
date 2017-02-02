@@ -156,126 +156,27 @@ class FrontRouter {
    * @return SimpleXMLExtended Filtered page data
    */
   static function executeRoutes($data_index) {
-    $routes  = array();
-    $data    = array();
-    $matched = false;
-    $url     = self::getRelativeURL();
+    // Get the full URL for matchign
+    $url = FrontRouterURL::getRelativePageURL();
 
-    // Remove the query from the url
-    $parsedUrl = parse_url($url);
-
-    // @todo - should this only be done for pretty urls??
-    if (@$parsedUrl['query']) {
-      $url = str_replace('?' . $parsedUrl['query'], '', $url);
-    }
-
-    // Remove any trailing slashes
-    $url = rtrim($url, '/');
-
-    // Check saved routes
-    $saved = self::getSavedRoutes();
-    $routes = array_merge($routes, $saved);
+    // Register saved routes
+    Router::addRoutes(self::getSavedRoutes());
 
     // Register routes from other plugins
     exec_action('front-route');
 
-    $registered = Router::getRegisteredRoutes();
-    $routes = array_merge($routes, $registered);
+    // Execute the router
+    $data = Router::run($url);
 
-    // Select a matching route
-    foreach ($routes as $route => $callback) {
-      // http://upshots.org/php/php-seriously-simple-router
-      // Turn the route string into a valid regex
-      $pattern = '/^' . str_replace('/', '\/', $route) . '$/';
+    // Set data from the router's action
+    if ($data) {
+      // Ensure $data_index has a default object
+      $data_index = $data_index ? $data_index : getPageObject();
 
-      // If the pattern matches, run the callback and pass in the parameters
-      $match = @preg_match($pattern, $url, $params);
-
-      if ($match) {
-        array_shift($params);
-
-        // Ensure we have a valid callback
-        if (is_callable($callback)) {
-          $cb = $callback;
-        } elseif (is_string($callback)) {
-          // Create a callable
-          $cb = create_function('', '$args = func_get_args(); ?>' . $callback);
-        }
-
-        $data = (object) call_user_func_array($cb, $params);
-        $matched = true;
-        break;
-      }
+      // Merge in the data
+      $data_index = (object) array_merge((array) $data_index, (array) $data);
     }
 
-    // Start output buffering
-    ob_start();
-
-    // Finally set the page data contents from return array, and collect buffer and save to content
-    if ($matched) {
-      // route match
-
-      if (!$data_index) {
-        $data_index = getPageObject();
-      }
-
-      if ($data) {
-        // callback has return data
-        $data_index = (object) array_merge((array) $data_index, (array) $data);
-      }
-
-      // support for content callables, so user can get arguments
-      // if content is callable, or content is null, save buffer to content
-      if (is_callable($data->content) || is_null($data->content)) {
-        if (is_callable($data->content)) {
-          call_user_func_array($data->content,$params);
-        }
-
-        $buffer  = ob_get_contents();
-
-        if ($buffer) {
-          $data_index->content = $buffer;
-        }
-      }
-    }
-
-    ob_end_clean();
     return $data_index;
-  }
-
-  // Gets the root URL
-  static function getRootURL() {
-    $pretty  = (string) $GLOBALS['PRETTYURLS'];
-    $root    = $GLOBALS['SITEURL'] . (empty($pretty) ? 'index.php' : null);
-    return $root;
-  }
-
-  // Get URL relative to the domain
-  static function getRelativeURL() {
-    $pretty  = (string) $GLOBALS['PRETTYURLS'];
-    $root    = self::getRootURL() . (empty($pretty) ? '?id=' : null);
-
-    return self::getURL($root);
-  }
-
-  // Get the full URL
-  static function getURL($root = false) {
-    // https://css-tricks.com/snippets/php/get-current-page-url/
-    $url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://' . $_SERVER["SERVER_NAME"] :  'https://' . $_SERVER["SERVER_NAME"];
-    $url .= $_SERVER["REQUEST_URI"];
-
-    // Remove http/https from the current url and root
-    $url = strstr($url, '//');
-    $root = $root ? strstr($root, '//') : '';
-
-    // Shave off the root
-    $url = str_replace($root, '', $url);
-
-    // Shave off trailing slashes and double slashes
-    $url = ltrim($url, '/');
-    $url = rtrim($url, '/');
-    $url = preg_replace('~/+~', '/', $url); // http://stackoverflow.com/questions/2217759/regular-expression-replace-multiple-slashes-with-only-one
-
-    return $url;
   }
 }

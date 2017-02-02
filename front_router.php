@@ -29,6 +29,7 @@ function register_plugin_front_router() {
   // Require dependencies
   require_once(FRONTROUTER_PHPPATH . 'plugin.class.php');
   require_once(FRONTROUTER_PHPPATH . 'router.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'url.class.php');
   require_once(FRONTROUTER_PHPPATH . 'polyfill.php');
   require_once(FRONTROUTER_PHPPATH . 'api.php');
 
