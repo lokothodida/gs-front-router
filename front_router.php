@@ -14,7 +14,7 @@ function register_plugin_front_router() {
 
   define('FRONTROUTER_DATAPATH', GSDATAOTHERPATH . FRONTROUTER . '/');
   define('FRONTROUTER_DATAHTACCESSFILE', FRONTROUTER_DATAPATH . '.htaccess');
-  define('FRONTROUTER_DATAROUTESFILE', FRONTROUTER_DATAPATH . '.routes.json');
+  define('FRONTROUTER_DATAROUTESFILE', FRONTROUTER_DATAPATH . 'routes.json');
 
   define('FRONTROUTER_ADMINURL', 'load.php?id=' . FRONTROUTER . '&action=');
   define('FRONTROUTER_PLUGINURL', $GLOBALS['SITEURL'] . '/plugins/' . FRONTROUTER . '/');

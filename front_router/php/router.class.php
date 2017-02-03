@@ -55,7 +55,7 @@ class Router {
    * @param string $url The url to match against
    * @return object The successful route
    */
-  public static function run($url) {
+  public static function executeFront($url) {
     $route = self::findMatchedRoute(self::$routes, $url);
 
     if ($route) {

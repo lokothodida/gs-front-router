@@ -156,7 +156,7 @@ class FrontRouter {
    * @return SimpleXMLExtended Filtered page data
    */
   static function executeRoutes($data_index) {
-    // Get the full URL for matchign
+    // Get the full URL for matching
     $url = FrontRouterURL::getRelativePageURL();
 
     // Register saved routes
@@ -166,7 +166,7 @@ class FrontRouter {
     exec_action('front-route');
 
     // Execute the router
-    $data = Router::run($url);
+    $data = Router::executeFront($url);
 
     // Set data from the router's action
     if ($data) {
