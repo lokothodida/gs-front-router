@@ -2,7 +2,6 @@
 
 /**
  * @package FrontRouter
- * @class FrontRouter
  *
  * Utility methods for the plugin and hooks/filters
  */
