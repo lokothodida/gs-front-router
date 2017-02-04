@@ -4,7 +4,7 @@
  * @package FrontRouter
  * @class Router
  */
-class Router {
+class FrontRouterRouter {
   /**
    * @param array $routes Routes
    */

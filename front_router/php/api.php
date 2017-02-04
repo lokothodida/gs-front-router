@@ -8,5 +8,5 @@
  * @param function|string $callback Action
  */
 function addFrontRoute($route, $callback) {
-  Router::addRoute($route, $callback);
+  FrontRouterRouter::addRoute($route, $callback);
 }

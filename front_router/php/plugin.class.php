@@ -160,13 +160,13 @@ class FrontRouter {
     $url = FrontRouterURL::getRelativePageURL();
 
     // Register saved routes
-    Router::addRoutes(self::getSavedRoutes());
+    FrontRouterRouter::addRoutes(self::getSavedRoutes());
 
     // Register routes from other plugins
     exec_action('front-route');
 
     // Execute the router
-    $data = Router::executeFront($url);
+    $data = FrontRouterRouter::executeFront($url);
 
     // Set data from the router's action
     if ($data) {
