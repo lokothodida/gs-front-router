@@ -1,0 +1,18 @@
+.routeform textarea, .CodeMirror,
+.CodeMirror-gutter, .CodeMirror-scroll { height: 350px !important; }
+
+.CodeMirror {
+  background: #fff;
+}
+
+.routeform .route {
+  border: 1px solid #aaa;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 0 10px 0;
+  background: #f9f9f9;
+}
+
+.routeform .route .deleteroute {
+  float: right;
+}

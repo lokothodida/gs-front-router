@@ -30,6 +30,8 @@ function register_plugin_front_router() {
   require_once(FRONTROUTER_PHPPATH . 'plugin.class.php');
   require_once(FRONTROUTER_PHPPATH . 'router.class.php');
   require_once(FRONTROUTER_PHPPATH . 'url.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'admin.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'data.class.php');
   require_once(FRONTROUTER_PHPPATH . 'polyfill.php');
   require_once(FRONTROUTER_PHPPATH . 'api.php');
 
@@ -42,7 +44,7 @@ function register_plugin_front_router() {
     'url'     => 'https://github.com/lokothodida',
     'desc'    => FrontRouter::i18n_r('PLUGIN_DESC'),
     'tab'     => 'plugins',
-    'admin'   => 'FrontRouter::admin'
+    'admin'   => 'FrontRouterAdmin::main'
   ));
 
   // Activate actions/filters
