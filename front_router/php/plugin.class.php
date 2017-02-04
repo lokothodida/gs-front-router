@@ -3,6 +3,8 @@
 /**
  * @package FrontRouter
  * @class FrontRouter
+ *
+ * Utility methods for the plugin and hooks/filters
  */
 class FrontRouter {
   /**
@@ -27,7 +29,6 @@ class FrontRouter {
    *
    * @param string $hash Internationalized key string
    * @param array $replacements
-   * @void
    */
   static function i18n($hash, $replacements = array()) {
     echo self::i18n_r($hash, $replacements);

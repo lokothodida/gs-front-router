@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package FrontRouter
  * @subpackage Admin
@@ -74,10 +75,10 @@ class FrontRouterAdmin {
       </p>
     </form>
 
-    <!--javascript-->
-
     <!--route template-->
     <template class="routetemplate"><?php self::showRouteForm('', ''); ?></template>
+
+    <!--javascript-->
 
     <!--codemirror-->
     <?php self::showJS('template/js/codemirror/lib/codemirror-compressed.js?v=0.2.0'); ?>
@@ -171,15 +172,21 @@ class FrontRouterAdmin {
     <?php
   }
 
+  /**
+   * Embed an external CSS file
+   *
+   * @param string $href Link to the file
+   */
   private static function showCSS($href) {
-    ?>
-    <link rel="stylesheet" href="<?php echo $href; ?>">
-    <?php
+    ?><link rel="stylesheet" href="<?php echo $href; ?>"><?php
   }
 
+  /**
+   * Embed an external JavaScript file
+   *
+   * @param string $src Link to the file
+   */
   private static function showJS($src) {
-    ?>
-    <script src="<?php echo $src; ?>"></script>
-    <?php
+    ?><script src="<?php echo $src; ?>"></script><?php
   }
 }
