@@ -4,7 +4,7 @@
 $i18n = array(
   // plugin
   'PLUGIN_NAME'    => 'Front Router',
-  'PLUGIN_DESC'    => 'Create front-end routes page routes',
+  'PLUGIN_DESC'    => 'Create front-end page routes',
   'MANAGE_ROUTES'  => 'Manage Routes',
 
   // admin

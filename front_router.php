@@ -1,40 +1,58 @@
 <?php
 
-namespace FrontRouterPlugin;
+register_plugin_front_router();
 
-call_user_func(function() {
+/**
+ * Registers the plugin, actions and filters
+ */
+function register_plugin_front_router() {
+  // Constants
+  define('FRONTROUTER', basename(__FILE__, '.php'));
+  define('FRONTROUTER_VERSION', '0.4.1');
+  define('FRONTROUTER_PLUGINPATH', GSPLUGINPATH . FRONTROUTER . '/');
+  define('FRONTROUTER_PHPPATH', FRONTROUTER_PLUGINPATH . 'php/');
 
-// thisfile
-  $thisfile = basename(__FILE__, '.php');
+  define('FRONTROUTER_DATAPATH', GSDATAOTHERPATH . FRONTROUTER . '/');
+  define('FRONTROUTER_DATAHTACCESSFILE', FRONTROUTER_DATAPATH . '.htaccess');
+  define('FRONTROUTER_DATAROUTESFILE', FRONTROUTER_DATAPATH . 'routes.json');
 
-// language
-  i18n_merge($thisfile) || i18n_merge($thisfile, 'en_US');
+  define('FRONTROUTER_ADMINURL', 'load.php?id=' . FRONTROUTER . '&action=');
+  define('FRONTROUTER_PLUGINURL', $GLOBALS['SITEURL'] . '/plugins/' . FRONTROUTER . '/');
+  define('FRONTROUTER_IMGURL', FRONTROUTER_PLUGINURL . 'img/');
+  define('FRONTROUTER_JSURL', FRONTROUTER_PLUGINURL . 'js/');
+  define('FRONTROUTER_CSSURL', FRONTROUTER_PLUGINURL . 'css/');
+  define('FRONTROUTER_PHPURL', FRONTROUTER_PLUGINURL . 'php/');
 
-// requires
-  require_once(GSPLUGINPATH . $thisfile . '/php/functions.php');
-  require_once(GSPLUGINPATH . $thisfile . '/php/constants.php');
-  require_once(GSPLUGINPATH . $thisfile . '/php/router.class.php');
-  require_once(GSPLUGINPATH . $thisfile . '/php/api.php');
+  // Language
+  i18n_merge(FRONTROUTER) || i18n_merge(FRONTROUTER, 'en_US');
 
-// register plugin
+  // Require dependencies
+  require_once(FRONTROUTER_PHPPATH . 'plugin.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'router.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'url.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'admin.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'data.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'polyfill.php');
+  require_once(FRONTROUTER_PHPPATH . 'api.php');
+
+  // Register plugin
   call_user_func_array('register_plugin', array(
-    'id'      => ID,
-    'name'    => i18n_r('PLUGIN_NAME'),
-    'version' => '0.4.0',
+    'id'      => FRONTROUTER,
+    'name'    => FrontRouter::i18n_r('PLUGIN_NAME'),
+    'version' => FRONTROUTER_VERSION,
     'author'  => 'Lawrence Okoth-Odida',
     'url'     => 'https://github.com/lokothodida',
-    'desc'    => i18n_r('PLUGIN_DESC'),
+    'desc'    => FrontRouter::i18n_r('PLUGIN_DESC'),
     'tab'     => 'plugins',
-    'admin'   => __NAMESPACE__ . '\admin'
+    'admin'   => 'FrontRouterAdmin::main'
   ));
 
-// activate actions/filters
-  // front-end
-  // route execution
-  add_filter('data_index',  __NAMESPACE__ . '\executeRoutes');
+  // Activate actions/filters
+  // Front-end
+  // Route execution
+  add_filter('data_index', 'FrontRouter::executeRoutes');
 
-  // back-end
-  // sidebar link
-  add_action('plugins-sidebar', 'createSideMenu' , array(ID, i18n_r('MANAGE_ROUTES')));
-
-});
+  // Back-end
+  // Sidebar link
+  add_action('plugins-sidebar', 'createSideMenu', array(FRONTROUTER, FrontRouter::i18n_r('MANAGE_ROUTES')));
+}

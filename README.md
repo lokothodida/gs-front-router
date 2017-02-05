@@ -1,18 +1,18 @@
 # GetSimple Front Router Plugin
-A plugin that executes custom-defined actions dependent on the front-end request
-URL. Designed to be used in conjunction with other plugins in order to build
-desired URL structures and route actions without modifying any `.htaccess` files.
+Executes user-defined actions dependening on the requested page URL.
+Designed to be used in conjunction with other plugins in order relate page actions
+to specific URL structures (without modifying any `.htaccess` files).
 
 # Requirements
-* PHP 5.3+
+* PHP 5.2.3+ (for Front Router v0.4.1+)
 * [GetSimple CMS 3.3.7+](https://gitub.com/GetSimpleCMS/GetSimpleCMS)
 
 # Features
-* Dynamically choose page content based on URL
-* Great for improving SEO for your site by having informative site URLs
-* Easily create error pages for specific page types
-* Conjoin functionality from other plugins and display your own page content
-* Create front page routes for your own plugins
+* Select page content based on the structure of the URL
+* Improve SEO for your site by having informative site URLs
+* Easily create custom error pages for specific page types
+* Combine functionality from other plugins to display your own custom page content
+* Create front page routes for your own plugins by registering hooks with this plugin
 * Available in English, Italian, French, German and Russian
 * Works with and without [Fancy/Pretty URLS](http://get-simple.info/wiki/how_to:website_settings) enabled (v0.3+)
 
