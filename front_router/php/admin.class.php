@@ -141,7 +141,9 @@ class FrontRouterAdmin {
   private static function showRouteForm($route, $callback) {
     ?>
     <div class="route">
-      <a href="#" class="deleteroute">&times;</a>
+      <div class="delete">
+        <a href="#" class="deleteroute">&times;</a>
+      </div>
       <p>
         <label for="route[]"><?php FrontRouter::i18n('ROUTE'); ?>:</label>
         <input class="text" name="route[]" value="<?php echo $route; ?>" required/>
