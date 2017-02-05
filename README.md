@@ -36,7 +36,8 @@ Check out the [wiki](https://github.com/lokothodida/gs-front-router/wiki) for mo
 * [Catalog (i18n Special Pages)](https://github.com/lokothodida/gs-front-router/wiki/Catalog-(i18n-Special-Pages)-Example)
 * [File listing](https://github.com/lokothodida/gs-front-router/wiki/File-Listing-Example)
 
-More examples in the [wiki](https://github.com/lokothodida/gs-front-router/wiki).
+More examples in the [wiki](https://github.com/lokothodida/gs-front-router/wiki) and the `examples` folder
+of the plugin.
 
 # Wiki
 Documentation, API, tutorials and contribution guidelines are all available on the [wiki](https://github.com/lokothodida/gs-front-router/wiki). Contributions are welcome.
@@ -45,7 +46,7 @@ Documentation, API, tutorials and contribution guidelines are all available on t
 GetSimple Front Router is licensed under [MIT](http://www.opensource.org/licenses/MIT).
 
 # Contributors
-* [dimayakovlev](https://github.com/dimayakovlev) - Russian translation
+* [dimayakovlev](https://github.com/dimayakovlev) - Russian translation, CSS enhancements in 0.4.2
 * [tablatronix](https://github.com/tablatronix) - Enhancements for Version 0.4.0
 
 # Copyright
