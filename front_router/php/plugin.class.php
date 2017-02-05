@@ -58,7 +58,9 @@ class FrontRouter {
       $data_index = $data_index ? $data_index : getPageObject();
 
       // Merge in the data
-      $data_index = (object) array_merge((array) $data_index, (array) $data);
+      foreach ($data as $prop => $value) {
+        $data_index->{$prop} = $value;
+      }
     }
 
     return $data_index;
