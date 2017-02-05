@@ -148,7 +148,7 @@ class FrontRouterAdmin {
       <p>
       <p>
         <label for="route[]"><?php FrontRouter::i18n('ACTION'); ?>:</label>
-        <textarea class="text" name="callback[]" required><?php echo $callback; ?></textarea>
+        <textarea class="text" name="callback[]"><?php echo $callback; ?></textarea>
       </p>
     </div>
     <?php
