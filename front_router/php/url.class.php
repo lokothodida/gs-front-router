@@ -30,16 +30,16 @@ class FrontRouterURL {
 
   /**
    * Get the current page's full URL
+   * https://css-tricks.com/snippets/php/get-current-page-url/
    *
    * @param string|bool $root Root string to shave off (i.e. domain)
    * @return string
    */
   static function getCurrentPageURL($root = false, $showQuery = false) {
-    // https://css-tricks.com/snippets/php/get-current-page-url/
-    $url  = @( $_SERVER["HTTPS"] != 'on' ) ? 'http://' . $_SERVER["SERVER_NAME"] :  'https://' . $_SERVER["SERVER_NAME"];
-    $url .= $_SERVER["REQUEST_URI"];
+    // Get the full canonical URL
+    $url  = self::getURLProtocol() . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-    // Remove http/https from the current url and root
+    // Remove the protocol from the current url and root
     $url = strstr($url, '//');
     $root = $root ? strstr($root, '//') : '';
 
@@ -58,5 +58,14 @@ class FrontRouterURL {
     $url = preg_replace('~/+~', '/', $url); // http://stackoverflow.com/questions/2217759/regular-expression-replace-multiple-slashes-with-only-one
 
     return $url;
+  }
+
+  /**
+   * Gets the URL protocol (http/https)
+   *
+   * @return string http or https
+   */
+  private static function getURLProtocol() {
+    return  'http' . (@($_SERVER['HTTPS'] != 'on') ? 's' : null);
   }
 }
