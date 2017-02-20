@@ -53,7 +53,7 @@ class FrontRouter {
     $data = FrontRouterRouter::executeFront($url);
 
     // Set data from the router's action
-    if ($data && @$data->type) {
+    if ($data && property_exists($data, 'type') && $data->type === 'json') {
       // RESTful service
       header('Content-Type: application/json');
       exit(json_encode($data->content));
