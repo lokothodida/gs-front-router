@@ -128,18 +128,24 @@ class FrontRouterRouter {
     // Ensure we have a valid callback
     $cb = self::callbackStringToFunction($callback);
 
+    // Build the data object
     $data = (object) call_user_func_array($cb, $params);
 
-    if (is_callable($data->content) || is_null($data->content)) {
-      if (is_callable($data->content)) {
-        call_user_func_array($data->content,$params);
-      }
+    // Now choose the correct content
+    // If the callback created a callable, execute it
+    if (is_callable($data->content)) {
+      $content = call_user_func_array($data->content, $params);
+    } else {
+      $content = '';
+    }
 
-      $buffer  = ob_get_contents();
+    // Check the buffer, and use either the buffer or the callable's result
+    $buffer = ob_get_contents();
 
-      if ($buffer) {
-        $data->content = $buffer;
-      }
+    if ($buffer) {
+      $data->content = $buffer;
+    } else {
+      $data->content = $content;
     }
 
     ob_end_clean();
