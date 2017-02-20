@@ -3,6 +3,9 @@
 class FrontRouterREST {
   /**
    * Convert an array data to a valid JSON string
+   *
+   * @param array $array
+   * @return string
    */
   public static function arrayToJSONString($array = array()) {
     return json_encode($array);
@@ -11,6 +14,8 @@ class FrontRouterREST {
   /**
    * Convert an array data to a valid XML string
    *
+   * @param array $array
+   * @return string
    */
   public static function arrayToXMLString($array = array()) {
     $xml = new SimpleXMLElement('<?xml version="1.0"?><data></data>');
@@ -23,12 +28,16 @@ class FrontRouterREST {
   }
 
   /**
-   * http://stackoverflow.com/a/5965940
+   * Convert an array to XML
+   * Edited from http://stackoverflow.com/a/5965940
+   *
+   * @param array $data
+   * @param SimpleXMLElement $xml_data
    */
   private static function arrayToXML($data = array(), &$xml_data) {
     foreach ($data as $key => $value) {
       if (is_numeric($key)) {
-        $key = 'item'.$key; //dealing with <0/>..<n/> issues
+        $key = 'item' . $key; //dealing with <0/>..<n/> issues
       }
 
       if ($key === '@attributes' && is_array($value)) {
