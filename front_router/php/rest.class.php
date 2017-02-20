@@ -18,18 +18,18 @@ class FrontRouterREST {
    * @return string
    */
   public static function arrayToXMLString($array = array()) {
-    $xml = new SimpleXMLElement('<?xml version="1.0"?><data></data>');
+    $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><data></data>');
 
-    // function call to convert array to xml
+    // Convert data to XML
     self::arrayToXML($array, $xml);
 
-    //saving generated xml file;
+    // Generate XML
     return $xml->asXML();
   }
 
   /**
    * Convert an array to XML
-   * Edited from http://stackoverflow.com/a/5965940
+   * @link http://stackoverflow.com/a/5965940
    *
    * @param array $data
    * @param SimpleXMLElement $xml_data
@@ -37,7 +37,7 @@ class FrontRouterREST {
   private static function arrayToXML($data = array(), &$xml_data) {
     foreach ($data as $key => $value) {
       if (is_numeric($key)) {
-        $key = 'item' . $key; //dealing with <0/>..<n/> issues
+        $key = 'item' . $key; // dealing with <0/>..<n/> issues
       }
 
       if ($key === '@attributes' && is_array($value)) {
