@@ -43,6 +43,9 @@ add_action('front-route', 'addFrontRoute', array(
   'FrontRouterExampleI18NNews::articleRoute'
 ));
 
+// Add a sidebar link in the admin panel for quick access to the special pages
+add_action('pages-sidebar', 'createSideMenu', array('i18n_specialpages&pages&special=news', 'Manage News'));
+
 /**
  * @package FrontRouter
  * @subpackage ExampleI18NNews
