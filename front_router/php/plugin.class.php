@@ -68,7 +68,7 @@ class FrontRouter {
 
       // Merge in the data
       foreach ($data as $prop => $value) {
-        $data_index->{$prop} = $value;
+        $data_index->{$prop} = (string) $value;
       }
     }
 
