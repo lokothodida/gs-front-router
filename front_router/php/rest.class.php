@@ -35,6 +35,13 @@ class FrontRouterREST {
    * @param SimpleXMLElement $xml_data
    */
   private static function arrayToXML($data = array(), &$xml_data) {
+    if (!is_array($data)) {
+      // No more arrays to iterate over - just stick the data into the node
+      $xml_data[0] = "$data";
+      return;
+    }
+
+    // Iterate through each data key=>value pair
     foreach ($data as $key => $value) {
       if (is_numeric($key)) {
         $key = 'item' . $key; // dealing with <0/>..<n/> issues
