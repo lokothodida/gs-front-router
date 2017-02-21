@@ -98,7 +98,7 @@ class FrontRouterExampleI18NNews {
    */
   public static function monthRoute($year, $month) {
     return array(
-      'title'   => 'New articles published in ' . $year . ', ' . $month,
+      'title'   => 'News articles published in ' . $year . '/' . $month,
       'content' => array(__CLASS__, 'monthAction')
     );
   }
@@ -192,11 +192,14 @@ class FrontRouterExampleI18NNews {
    */
   public static function displayArticle($article) {
     $date = self::getArticleYearMonthDay($article->creDate);
+    $year  = $date['year'];
+    $month = $date['month'];
+    $day   = $date['day'];
     ?>
     <p>Posted by <?php echo $article->author; ?></p>
     <p>Date:
-      <a href="/news/<?php echo $date['year']; ?>/"><?php echo $date['year']; ?></a>
-      <a href="/news/<?php echo $date['year']; ?>/<?php echo $date['month']; ?>/"><?php echo $date['month']; ?></a>
+      <a href="/news/<?php echo $year; ?>/"><?php echo $year; ?></a>
+      <a href="/news/<?php echo $year; ?>/<?php echo $month; ?>/"><?php echo $month; ?></a>
     </p>
     <?php echo $article->content; ?>
     <?php
@@ -221,7 +224,7 @@ class FrontRouterExampleI18NNews {
       <li>
         <h3>
           <strong>[<?php echo $year; ?>/<?php echo $month; ?>/<?php echo $day; ?>]</strong>
-          <a href="/news/<?php echo $date['year']; ?>/<?php echo $date['month']; ?>/<?php echo $date['day']; ?>/<?php echo $slug; ?>.html"><?php echo $article->title; ?></a>
+          <a href="/news/<?php echo $year; ?>/<?php echo $month; ?>/<?php echo $day; ?>/<?php echo $slug; ?>.html"><?php echo $article->title; ?></a>
           </h3>
       </li>
       <?php
