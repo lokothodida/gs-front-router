@@ -14,7 +14,8 @@ to specific URL structures (without modifying any `.htaccess` files).
 * Combine functionality from other plugins to display your own custom page content
 * Create front page routes for your own plugins by registering hooks with this plugin
 * Available in English, Italian, French, German and Russian
-* Works with and without [Fancy/Pretty URLS](http://get-simple.info/wiki/how_to:website_settings) enabled (v0.3+)
+* Works with and without [Fancy/Pretty URLS](http://get-simple.info/wiki/how_to:website_settings) enabled (`v0.3+`)
+* Build RESTful API services/endpoints (`v0.5.0+`)
 
 # Screenshots
 ![screenshot of admin panel](https://cloud.githubusercontent.com/assets/4363863/14022767/31a5b174-f1d9-11e5-9d55-d69679ef82bd.png)
