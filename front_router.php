@@ -32,6 +32,7 @@ function register_plugin_front_router() {
   require_once(FRONTROUTER_PHPPATH . 'url.class.php');
   require_once(FRONTROUTER_PHPPATH . 'admin.class.php');
   require_once(FRONTROUTER_PHPPATH . 'data.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'rest.class.php');
   require_once(FRONTROUTER_PHPPATH . 'polyfill.php');
   require_once(FRONTROUTER_PHPPATH . 'api.php');
 

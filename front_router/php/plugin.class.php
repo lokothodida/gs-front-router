@@ -53,13 +53,22 @@ class FrontRouter {
     $data = FrontRouterRouter::executeFront($url);
 
     // Set data from the router's action
-    if ($data) {
+    if ($data && property_exists($data, 'type') && $data->type === 'json') {
+      // RESTful JSON service
+      header('Content-Type: application/json');
+      exit(FrontRouterRest::arrayToJSONString($data->content));
+    } elseif ($data && property_exists($data, 'type') && $data->type === 'xml') {
+      // RESTful XML service
+      header('Content-Type: application/xml');
+      exit(FrontRouterREST::arrayToXMLString($data->content));
+    } elseif ($data) {
+      // Front routed page
       // Ensure $data_index has a default object
       $data_index = $data_index ? $data_index : getPageObject();
 
       // Merge in the data
       foreach ($data as $prop => $value) {
-        $data_index->{$prop} = $value;
+        $data_index->{$prop} = (string) $value;
       }
     }
 
