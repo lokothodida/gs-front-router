@@ -8,7 +8,7 @@ register_plugin_front_router();
 function register_plugin_front_router() {
   // Constants
   define('FRONTROUTER', basename(__FILE__, '.php'));
-  define('FRONTROUTER_VERSION', '0.4.4');
+  define('FRONTROUTER_VERSION', '0.5.0');
   define('FRONTROUTER_PLUGINPATH', GSPLUGINPATH . FRONTROUTER . '/');
   define('FRONTROUTER_PHPPATH', FRONTROUTER_PLUGINPATH . 'php/');
 
@@ -32,6 +32,7 @@ function register_plugin_front_router() {
   require_once(FRONTROUTER_PHPPATH . 'url.class.php');
   require_once(FRONTROUTER_PHPPATH . 'admin.class.php');
   require_once(FRONTROUTER_PHPPATH . 'data.class.php');
+  require_once(FRONTROUTER_PHPPATH . 'rest.class.php');
   require_once(FRONTROUTER_PHPPATH . 'polyfill.php');
   require_once(FRONTROUTER_PHPPATH . 'api.php');
 

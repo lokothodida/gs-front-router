@@ -1,10 +1,10 @@
 # GetSimple Front Router Plugin
-Executes user-defined actions dependening on the requested page URL.
+Executes user-defined actions depending on the requested page URL.
 Designed to be used in conjunction with other plugins in order relate page actions
 to specific URL structures (without modifying any `.htaccess` files).
 
 # Requirements
-* PHP 5.2.3+ (for Front Router v0.4.1+)
+* PHP 5.2.3+ (for Front Router `v0.4.1+`)
 * [GetSimple CMS 3.3.7+](https://gitub.com/GetSimpleCMS/GetSimpleCMS)
 
 # Features
@@ -14,7 +14,8 @@ to specific URL structures (without modifying any `.htaccess` files).
 * Combine functionality from other plugins to display your own custom page content
 * Create front page routes for your own plugins by registering hooks with this plugin
 * Available in English, Italian, French, German and Russian
-* Works with and without [Fancy/Pretty URLS](http://get-simple.info/wiki/how_to:website_settings) enabled (v0.3+)
+* Works with and without [Fancy/Pretty URLS](http://get-simple.info/wiki/how_to:website_settings) enabled (`v0.3+`)
+* Build RESTful API services/endpoints (`v0.5.0+`)
 
 # Screenshots
 ![screenshot of admin panel](https://cloud.githubusercontent.com/assets/4363863/14022767/31a5b174-f1d9-11e5-9d55-d69679ef82bd.png)
@@ -23,7 +24,7 @@ to specific URL structures (without modifying any `.htaccess` files).
 
 # Getting Started
 1. Install and enable the plugin.
-2. Go to **Plugins** -> **Manage routes**.
+2. Go to **Plugins** -> **Manage Routes**.
 3. Add, edit and delete your routes.
 4. Visit a URL on your site that matches the pattern to test your route.
 
