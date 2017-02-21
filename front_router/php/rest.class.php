@@ -35,8 +35,8 @@ class FrontRouterREST {
    * @param SimpleXMLElement $xml_data
    */
   private static function arrayToXML($data = array(), &$xml_data) {
-    if (!is_array($data)) {
-      // No more arrays to iterate over - just stick the data into the node
+    if (!is_array($data) && !is_object($data)) {
+      // No more arrays/objects to iterate over - just stick the data into the node
       $xml_data[0] = "$data";
       return;
     }
