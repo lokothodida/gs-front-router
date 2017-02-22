@@ -115,8 +115,21 @@ class FrontRouterAdmin {
           evt.preventDefault();
         });
 
+        // Collapse route (hide the callback)
+        $('.routeform').on('click', '.collapse-route', function(evt) {
+          var $target = $(evt.target);
+          var $route  = $target.closest('.route');
+
+          // Toggle the callback and "..." div
+          $route.find('.callback').slideToggle(200);
+          $route.find('.callback-hidden').toggleClass('collapsed');
+          $target.toggleClass('collapsed');
+
+          evt.preventDefault();
+        });
+
         // Delete route
-        $('.routeform').on('click', '.deleteroute', function(evt) {
+        $('.routeform').on('click', '.delete-route', function(evt) {
           var $route = $(evt.target).closest('.route');
           var route  = $route.find('input').val();
           var status = confirm(<?php echo json_encode(FrontRouter::i18n_r('DELETE_ROUTE_SURE')); ?>.replace('%route%', route));
@@ -142,16 +155,22 @@ class FrontRouterAdmin {
     ?>
     <div class="route">
       <div class="delete">
-        <a href="#" class="deleteroute">&times;</a>
+        <a href="#" class="btn delete-route">&times;</a>
+        <a href="#" class="btn collapse-route"></a>
       </div>
-      <p>
+      <div class="field">
         <label for="route[]"><?php FrontRouter::i18n('ROUTE'); ?>:</label>
         <input class="text" name="route[]" value="<?php echo $route; ?>" required/>
-      <p>
-      <p>
+      </div>
+      <div class="field">
         <label for="route[]"><?php FrontRouter::i18n('ACTION'); ?>:</label>
-        <textarea class="text" name="callback[]"><?php echo $callback; ?></textarea>
-      </p>
+        <div class="callback">
+          <textarea class="text" name="callback[]"><?php echo $callback; ?></textarea>
+        </div>
+        <div class="callback-hidden collapsed">
+          <p>...</p>
+        </div>
+      </div>
     </div>
     <?php
   }

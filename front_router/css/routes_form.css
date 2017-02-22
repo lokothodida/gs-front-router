@@ -15,7 +15,29 @@
   box-shadow: 0px 0px 2px #cccccc;
 }
 
-.routeform .route .deleteroute {
+.routeform .route .field {
+  margin: 0 0 20px 0;
+}
+
+.routeform .route .field:last-child {
+  margin: 0;
+}
+
+.routeform div.collapsed {
+  display: none;
+}
+
+.routeform .route .collapse-route:before {
+  content: "\25BC";
+}
+
+.routeform .route .collapse-route.collapsed::before {
+  content: "\25B2";
+}
+
+.routeform .route .btn {
   float: right;
   font-size: 18px;
+  margin: 0 0 0 3px;
+  padding: 2px;
 }
