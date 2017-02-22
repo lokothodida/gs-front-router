@@ -209,7 +209,7 @@ class FrontRouterAdmin {
 
           // Make routes sortable (except for the buttons and inputs)
           $('.routeform .routes').sortable({
-            cancel: 'input, textarea, .CodeMirror, .btn',
+            cancel: 'label, input, textarea, .CodeMirror, .btn',
           });
 
           // Add route
