@@ -76,7 +76,21 @@ class FrontRouterAdmin {
     </form>
 
     <!--route template-->
-    <template class="routetemplate"><?php self::showRouteForm('', ''); ?></template>
+    <?php
+      $exampleAction = implode("\n", array(
+        '<?php',
+        '  // Callback',
+        '  function your_callback() {',
+        '    echo \'Your content\';',
+        '  }',
+        '  // Action data',
+        '  return array(',
+        '    \'title\'   => \'Your title\',',
+        '    \'content\' => \'your_callback\',',
+        '  );'
+      ));
+    ?>
+    <template class="routetemplate"><?php self::showRouteForm('', $exampleAction); ?></template>
 
     <!--javascript-->
 
@@ -177,7 +191,7 @@ class FrontRouterAdmin {
       </div>
       <div class="field">
         <label for="route[]"><?php FrontRouter::i18n('ROUTE'); ?>:</label>
-        <input class="text" name="route[]" value="<?php echo $route; ?>" required/>
+        <input class="text" name="route[]" value="<?php echo $route; ?>" placeholder="your/route/here/" required/>
       </div>
       <div class="field">
         <label for="route[]"><?php FrontRouter::i18n('ACTION'); ?>:</label>
