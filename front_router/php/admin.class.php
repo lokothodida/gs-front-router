@@ -87,49 +87,31 @@ class FrontRouterAdmin {
     <script type="text/javascript">
       /* global jQuery, CodeMirror */
       jQuery(function($) {
-        // Make a Codemirror Instance
-        var makeEditor = function(textarea) {
-          var editor = CodeMirror.fromTextArea(textarea, {
+        function createEditor(textarea) {
+          return CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
           });
-        };
+        }
 
-        $('.routeform .route textarea').each(function(idx, elem) {
-          makeEditor(elem);
-        });
+        function getTemplate() {
+          return $($('.routetemplate').html());
+        }
 
-        // Make routes sortable
-        $('.routeform .routes').sortable({
-          cancel: 'textarea, .CodeMirror, .deleteroute, input',
-        });
-
-        // Add route
-        $('body').on('click', '.addroute', function(evt) {
-          var $template = $($('.routetemplate').html());
+        function addRouteCallback(evt) {
+          var $template = getTemplate();
+          var textarea  = $template.find('textarea')[0];
           $('.routes').append($template);
 
           // Enable CodeMirror on the new textarea
-          makeEditor($template.find('textarea')[0]);
+          createEditor(textarea);
+
+          // Scroll the route into view
           $template[0].scrollIntoView();
 
           evt.preventDefault();
-        });
+        }
 
-        // Collapse route (hide the callback)
-        $('.routeform').on('click', '.collapse-route', function(evt) {
-          var $target = $(evt.target);
-          var $route  = $target.closest('.route');
-
-          // Toggle the callback and "..." div
-          $route.find('.callback').slideToggle(200);
-          $route.find('.callback-hidden').toggleClass('collapsed');
-          $target.toggleClass('collapsed');
-
-          evt.preventDefault();
-        });
-
-        // Delete route
-        $('.routeform').on('click', '.delete-route', function(evt) {
+        function deleteRouteCallback(evt) {
           var $route = $(evt.target).closest('.route');
           var route  = $route.find('input').val();
           var status = confirm(<?php echo json_encode(FrontRouter::i18n_r('DELETE_ROUTE_SURE')); ?>.replace('%route%', route));
@@ -139,7 +121,42 @@ class FrontRouterAdmin {
           }
 
           evt.preventDefault();
-        });
+        }
+
+        function collapseRouteCallback(evt) {
+          var $target = $(evt.target);
+          var $route  = $target.closest('.route');
+
+          // Toggle the callback and "..." div
+          $route.find('.callback').slideToggle(200);
+          $route.find('.callback-hidden').toggleClass('collapsed');
+          $target.toggleClass('collapsed');
+
+          evt.preventDefault();
+        }
+
+        function init() {
+          // Initialize editors
+          $('.routeform .route textarea').each(function(idx, textarea) {
+            createEditor(textarea);
+          });
+
+          // Make routes sortable (except for the buttons and inputs)
+          $('.routeform .routes').sortable({
+            cancel: 'input, textarea, .CodeMirror, .btn',
+          });
+
+          // Add route
+          $('body').on('click', '.addroute', addRouteCallback);
+
+          // Collapse route (hide the callback)
+          $('.routeform').on('click', '.collapse-route', collapseRouteCallback);
+
+          // Delete route
+          $('.routeform').on('click', '.delete-route', deleteRouteCallback);
+        }
+
+        init();
       });
     </script>
     <?php
