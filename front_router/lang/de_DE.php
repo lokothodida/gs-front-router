@@ -17,5 +17,5 @@ $i18n = array(
   'ROUTE'                 => 'Route',
   'ACTION'                => 'Vorgehen',
   'ADD_ROUTE'             => 'Route hinzufügen',
-  'DELETE_ROUTE_SURE'     => 'Sind Sie sicher, dass Sie die Route zu löschen "%route%?"',
+  'DELETE_ROUTE_SURE'     => 'Sind Sie sicher, dass Sie die Route zu löschen "%route%"?',
 );

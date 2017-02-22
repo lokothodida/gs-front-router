@@ -17,5 +17,5 @@ $i18n = array(
   'ROUTE'                 => 'Route',
   'ACTION'                => 'Azione',
   'ADD_ROUTE'             => 'Aggiungi Strada',
-  'DELETE_ROUTE_SURE'     => 'Sei sicuro di voler eliminare il percorso "%route%?"',
+  'DELETE_ROUTE_SURE'     => 'Sei sicuro di voler eliminare il percorso "%route%"?',
 );

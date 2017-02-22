@@ -4,7 +4,7 @@
 $i18n = array(
   // plugin
   'PLUGIN_NAME'    => 'Front Router',
-  'PLUGIN_DESC'    => 'Create front-end page routes',
+  'PLUGIN_DESC'    => 'Create routes for front-end pages',
   'MANAGE_ROUTES'  => 'Manage Routes',
 
   // admin
@@ -17,5 +17,5 @@ $i18n = array(
   'ROUTE'                 => 'Route',
   'ACTION'                => 'Action',
   'ADD_ROUTE'             => 'Add Route',
-  'DELETE_ROUTE_SURE'     => 'Are you sure that you want to delete the route "%route%?"',
+  'DELETE_ROUTE_SURE'     => 'Are you sure that you want to delete the route "%route%"?',
 );

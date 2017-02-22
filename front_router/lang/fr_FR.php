@@ -17,5 +17,5 @@ $i18n = array(
   'ROUTE'                 => 'Route',
   'ACTION'                => 'Action',
   'ADD_ROUTE'             => 'Ajouter Route',
-  'DELETE_ROUTE_SURE'     => 'Etes-vous sûr que vous voulez supprimer l\'itinéraire "%route%?"',
+  'DELETE_ROUTE_SURE'     => 'Etes-vous sûr que vous voulez supprimer l\'itinéraire "%route%"?',
 );
