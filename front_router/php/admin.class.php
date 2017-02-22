@@ -62,7 +62,11 @@ class FrontRouterAdmin {
 
     <h3 class="floated"><?php FrontRouter::i18n('MANAGE_ROUTES'); ?></h3>
     <nav class="edit-nav clearfix">
-      <a href="#" class="addroute"><?php FrontRouter::i18n('ADD_ROUTE'); ?></a>
+      <p>
+        <a href="#" class="addroute"><?php FrontRouter::i18n('ADD_ROUTE'); ?></a>
+        <?php i18n('FILTER'); ?>:
+        <input type="text" class="_text ac_input filter-routes" style="width:80px" autocomplete="off">
+      </p>
     </nav>
 
     <form method="post" class="routeform">
@@ -149,6 +153,24 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
+        function filterRoutesCallback(evt) {
+          var text    = evt.target.value;
+          var $routes = $('.routeform .route');
+
+          $routes.each(function(idx, route) {
+            var $route = $(route);
+            var name   = $route.find('.name').val();
+
+            if (name.match(text)) {
+              $route.show();
+            } else {
+              $route.hide();
+            }
+          });
+
+          evt.preventDefault();
+        }
+
         function init() {
           // Initialize editors
           $('.routeform .route textarea').each(function(idx, textarea) {
@@ -161,13 +183,16 @@ class FrontRouterAdmin {
           });
 
           // Add route
-          $('body').on('click', '.addroute', addRouteCallback);
+          $('#maincontent').on('click', '.addroute', addRouteCallback);
 
           // Collapse route (hide the callback)
           $('.routeform').on('click', '.collapse-route', collapseRouteCallback);
 
           // Delete route
           $('.routeform').on('click', '.delete-route', deleteRouteCallback);
+
+          // Filter routes
+          $('#maincontent').on('keyup', '.filter-routes', filterRoutesCallback);
         }
 
         init();
@@ -191,7 +216,7 @@ class FrontRouterAdmin {
       </div>
       <div class="field">
         <label for="route[]"><?php FrontRouter::i18n('ROUTE'); ?>:</label>
-        <input class="text" name="route[]" value="<?php echo $route; ?>" placeholder="your/route/here/" required/>
+        <input class="text name" name="route[]" value="<?php echo $route; ?>" placeholder="your/route/here/" required/>
       </div>
       <div class="field">
         <label for="route[]"><?php FrontRouter::i18n('ACTION'); ?>:</label>
