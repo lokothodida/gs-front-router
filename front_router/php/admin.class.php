@@ -80,8 +80,8 @@ class FrontRouterAdmin {
         <?php foreach ($routes as $route => $callback) self::showRouteForm($route, $callback); ?>
       </div>
 
-      <div>
-        <input type="submit" class="submit" name="save" value="<?php i18n('BTN_SAVECHANGES'); ?>">
+      <div class="submit-line">
+        <input type="submit" class="submit save-changes" name="save" value="<?php i18n('BTN_SAVECHANGES'); ?>">
       </div>
     </form>
 
@@ -178,6 +178,22 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
+        function createSubmitButtonForSidebar() {
+          // Duplicate the save changes button and push it into the sidebar
+          var $form = $('<form id="js_submit_line"></form>');
+          var $saveChanges = $('.save-changes')
+          var $submitButton = $saveChanges.clone();
+          var $sidebar = $('#sidebar');
+
+          $sidebar.append($form.append($submitButton));
+
+          // When the button is clicked, submit the original form
+          $form.on('submit', function(evt) {
+            evt.preventDefault();
+            $saveChanges.click();
+          });
+        }
+
         function scrollTo(elem) {
           // https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
           $('html, body').animate({
@@ -207,6 +223,9 @@ class FrontRouterAdmin {
 
           // Filter routes
           $('#maincontent').on('keyup', '.filter-routes', filterRoutesCallback);
+
+          // Duplicate submit button for sidebar
+          createSubmitButtonForSidebar();
         }
 
         init();
