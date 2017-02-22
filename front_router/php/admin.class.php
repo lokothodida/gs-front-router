@@ -124,7 +124,7 @@ class FrontRouterAdmin {
           createEditor(textarea);
 
           // Scroll the route into view
-          $template[0].scrollIntoView();
+          scrollTo($template);
 
           evt.preventDefault();
         }
@@ -169,6 +169,13 @@ class FrontRouterAdmin {
           });
 
           evt.preventDefault();
+        }
+
+        function scrollTo(elem) {
+          // https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
+          $('html, body').animate({
+            scrollTop: $(elem).offset().top
+          }, 1000);
         }
 
         function init() {
