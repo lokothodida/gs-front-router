@@ -63,7 +63,13 @@ class FrontRouterAdmin {
     <h3 class="floated"><?php FrontRouter::i18n('MANAGE_ROUTES'); ?></h3>
     <nav class="edit-nav clearfix">
       <p>
+        <!--Add Route-->
         <a href="#" class="addroute"><?php FrontRouter::i18n('ADD_ROUTE'); ?></a>
+
+        <!--Documentation-->
+        <a href="https://github.com/lokothodida/gs-front-router/wiki/" target="_blank"><?php i18n('SIDE_DOCUMENTATION'); ?></a>
+
+        <!--Live filter-->
         <?php i18n('FILTER'); ?>:
         <input type="text" class="_text ac_input filter-routes" style="width:80px" autocomplete="off">
       </p>
@@ -74,9 +80,9 @@ class FrontRouterAdmin {
         <?php foreach ($routes as $route => $callback) self::showRouteForm($route, $callback); ?>
       </div>
 
-      <p id="submit_line">
+      <div>
         <input type="submit" class="submit" name="save" value="<?php i18n('BTN_SAVECHANGES'); ?>">
-      </p>
+      </div>
     </form>
 
     <!--route template-->
@@ -87,6 +93,7 @@ class FrontRouterAdmin {
         '  function your_callback() {',
         '    echo \'Your content\';',
         '  }',
+        '',
         '  // Action data',
         '  return array(',
         '    \'title\'   => \'Your title\',',
