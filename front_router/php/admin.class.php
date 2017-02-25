@@ -121,6 +121,12 @@ class FrontRouterAdmin {
     <script type="text/javascript">
       /* global jQuery, CodeMirror */
       jQuery(function($) {
+        /**
+         * Create an editor instance
+         *
+         * @param textarea
+         * @return CodeMirror instance
+         */
         function createEditor(textarea) {
           return CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
@@ -128,12 +134,22 @@ class FrontRouterAdmin {
           });
         }
 
-        function getTemplate() {
+        /**
+         * Get a route template
+         *
+         * @return jQueryObject
+         */
+        function getRouteTemplate() {
           return $($('.routetemplate').html());
         }
 
+        /**
+         * Callback fired when clicking "Add Route" button is clicked
+         *
+         * @param Event evt
+         */
         function addRouteCallback(evt) {
-          var $template = getTemplate();
+          var $template = getRouteTemplate();
           var textarea  = $template.find('textarea')[0];
           $('.routes').append($template);
 
@@ -146,6 +162,11 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
+        /**
+         * Callback fired when "Delete Route" button is clicked
+         *
+         * @param Event evt
+         */
         function deleteRouteCallback(evt) {
           var $route = $(evt.target).closest('.route-container');
           var route  = $route.find('input').val();
@@ -158,6 +179,12 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
+        /**
+         * Toggle a route action's visibility
+         *
+         * @param jQueryObject $route Route
+         * @param Boolean collapse Selects whether or not to collapse/expand the route
+         */
         function toggleRoute($route, collapse = true) {
           var $button = $route.find('.btn.collapse-route');
           var delay   = 200;
@@ -173,12 +200,23 @@ class FrontRouterAdmin {
           }
         }
 
+        /**
+         * Toggle action visibility of all routes
+         *
+         * @param jQueryCollection $routes
+         * @param Boolean collapsee Selects whether or not to collapse/expand the routes
+         */
         function toggleAllRoutes($routes, collapse = true) {
           $routes.each(function(idx, route) {
             toggleRoute($(route), collapse);
           });
         }
 
+        /**
+         * Callback fired when "Collapse route" button clicked
+         *
+         * @param Event evt
+         */
         function collapseRouteCallback(evt) {
           var $target  = $(evt.target);
           var $route   = $target.closest('.route');
@@ -189,18 +227,34 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
-        function collapseAllRoutes(evt) {
+        /**
+         * Callback fired when "Collapse all routes" button clicked
+         *
+         * @param Event evt
+         */
+        function collapseAllRoutesCallback(evt) {
           toggleAllRoutes($('.route'), true);
 
           evt.preventDefault();
         }
 
-        function expandAllRoutes(evt) {
+        /**
+         * Callback fired when "Expand all routes" button clicked
+         *
+         * @param Event evt
+         */
+        function expandAllRoutesCallback(evt) {
           toggleAllRoutes($('.route'), false);
 
           evt.preventDefault();
         }
 
+        /**
+         * Filter routes according to given text
+         *
+         * @param jQueryObject $routes
+         * @param string text
+         */
         function filterRoutes($routes, text) {
           $routes.each(function(idx, route) {
             var $route = $(route);
@@ -214,6 +268,11 @@ class FrontRouterAdmin {
           });
         }
 
+        /**
+         * Callback fired when filter field text changes
+         *
+         * @param Event evt
+         */
         function filterRoutesCallback(evt) {
           var text    = evt.target.value;
           var $routes = $('.route-container');
@@ -223,6 +282,11 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
+        /**
+         * Callback fired when "Move route up" button clicked
+         *
+         * @param Event evt
+         */
         function moveRouteUpCallback(evt) {
           var $container = $(evt.target).closest('.route-container');
           $prev = $container.prev();
@@ -235,6 +299,11 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
+        /**
+         * Callback fired when "Move route down" button clicked
+         *
+         * @param Event evt
+         */
         function moveRouteDownCallback(evt) {
           var $container = $(evt.target).closest('.route-container');
           $next = $container.next();
@@ -247,6 +316,9 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
+        /**
+         * Creates copy of submit button in the plugin sidebar
+         */
         function createSubmitButtonForSidebar() {
           // Duplicate the save changes button and push it into the sidebar
           var $form = $('<form id="js_submit_line"></form>');
@@ -263,13 +335,22 @@ class FrontRouterAdmin {
           });
         }
 
+        /**
+         * Scrolls to an element
+         *
+         * @link https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
+         *
+         * @param HTMLElement elem
+         */
         function scrollTo(elem) {
-          // https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
           $('html, body').animate({
             scrollTop: $(elem).offset().top
           }, 1000);
         }
 
+        /**
+         * Initialize the page
+         */
         function init() {
           var $maincontent = $('#maincontent');
 
@@ -300,8 +381,8 @@ class FrontRouterAdmin {
           $maincontent.on('click', '.move-down', moveRouteDownCallback);
 
           // Toggle all routes
-          $maincontent.on('click', '.collapse-all-routes', collapseAllRoutes);
-          $maincontent.on('click', '.expand-all-routes', expandAllRoutes);
+          $maincontent.on('click', '.collapse-all-routes', collapseAllRoutesCallback);
+          $maincontent.on('click', '.expand-all-routes', expandAllRoutesCallback);
 
           // Duplicate submit button for sidebar
           createSubmitButtonForSidebar();
