@@ -157,52 +157,50 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
-        function collapseRouteCallback(evt) {
-          var $target = $(evt.target);
-          var $route  = $target.closest('.route');
+        function toggleRoute($route, collapse = true) {
+          var $button = $route.find('.btn.collapse-route');
+          var delay   = 200;
 
-          // Toggle the callback and "..." div
-          $route.find('.callback').slideToggle(200);
-          $route.find('.callback-hidden').toggleClass('collapsed');
-          $target.toggleClass('collapsed');
+          if (collapse) {
+            $route.find('.callback').slideUp(delay);
+            $route.find('.callback-hidden').removeClass('collapsed');
+            $button.addClass('collapsed');
+          } else {
+            $route.find('.callback').slideDown(delay);
+            $route.find('.callback-hidden').addClass('collapsed');
+            $button.removeClass('collapsed');
+          }
+        }
+
+        function toggleAllRoutes($routes, collapse = true) {
+          $routes.each(function(idx, route) {
+            toggleRoute($(route), collapse);
+          });
+        }
+
+        function collapseRouteCallback(evt) {
+          var $target  = $(evt.target);
+          var $route   = $target.closest('.route');
+          var collapse = !$target.hasClass('collapsed');
+
+          toggleRoute($route, collapse);
 
           evt.preventDefault();
         }
 
         function collapseAllRoutes(evt) {
-          var $routes = $('.route');
-
-          $routes.each(function(idx, route) {
-            var $route = $(route);
-            var $button = $route.find('.btn.collapse-route');
-
-            $route.find('.callback').slideUp(200);
-            $route.find('.callback-hidden').removeClass('collapsed');
-            $button.addClass('collapsed');
-          });
+          toggleAllRoutes($('.route'), true);
 
           evt.preventDefault();
         }
 
         function expandAllRoutes(evt) {
-          var $routes = $('.route');
-
-          $routes.each(function(idx, route) {
-            var $route = $(route);
-            var $button = $route.find('.btn.collapse-route');
-
-            $route.find('.callback').slideDown(200);
-            $route.find('.callback-hidden').addClass('collapsed');
-            $button.removeClass('collapsed');
-          });
+          toggleAllRoutes($('.route'), false);
 
           evt.preventDefault();
         }
 
-        function filterRoutesCallback(evt) {
-          var text    = evt.target.value;
-          var $routes = $('.routeform .route-container');
-
+        function filterRoutes($routes, text) {
           $routes.each(function(idx, route) {
             var $route = $(route);
             var name   = $route.find('.name').val();
@@ -213,6 +211,13 @@ class FrontRouterAdmin {
               $route.hide();
             }
           });
+        }
+
+        function filterRoutesCallback(evt) {
+          var text    = evt.target.value;
+          var $routes = $('.route-container');
+
+          filterRoutes($routes, text);
 
           evt.preventDefault();
         }
