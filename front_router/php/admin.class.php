@@ -124,6 +124,7 @@ class FrontRouterAdmin {
         function createEditor(textarea) {
           return CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
+            mode: 'php',
           });
         }
 
