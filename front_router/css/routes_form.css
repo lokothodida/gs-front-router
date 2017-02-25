@@ -1,5 +1,5 @@
 .routeform textarea, .CodeMirror,
-.CodeMirror-gutter, .CodeMirror-scroll { height: 300px !important; }
+.CodeMirror-gutter, .CodeMirror-scroll { height: 200px !important; }
 
 .CodeMirror {
   background: #fff;
