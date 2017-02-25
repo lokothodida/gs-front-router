@@ -1,7 +1,11 @@
 <?php
-
-// Translated by Dmitry Yakovlev https://github.com/dimayakovlev
-
+/**
+ * Russian Language File
+ *
+ * @package FrontRouter
+ * @author dimayakovlev (Dmitry Yakovlev)
+ * @link https://github.com/dimayakovlev
+ */
 $i18n = array(
   // plugin
   'PLUGIN_NAME'    => 'Front Router',
@@ -15,8 +19,11 @@ $i18n = array(
   'INIT_ROUTE_ERROR'      => 'Не удалось создать исходный файл маршрутов',
   'UPDATE_ROUTES_SUCCESS' => 'Маршруты успешно обновлены',
   'UPDATE_ROUTES_ERROR'   => 'Ошибка обновления маршрутов',
+  'COLLAPSE_ALL_ROUTES'   => 'Свернуть все маршруты',
+  'EXPAND_ALL_ROUTES'     => 'Открыть все маршруты',
   'ROUTE'                 => 'маршрут',
   'ACTION'                => 'действие',
   'ADD_ROUTE'             => 'Добавить маршрут',
   'DELETE_ROUTE_SURE'     => 'Вы уверены, что хотите удалить маршрут "%route%"?',
+  'TOTAL_ROUTES'          => '%total% маршрутов в общей сложности',
 );

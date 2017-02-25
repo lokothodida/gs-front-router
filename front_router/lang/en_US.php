@@ -1,6 +1,10 @@
 <?php
-
-// English
+/**
+ * English Language File
+ *
+ * @package FrontRouter
+ * @author lokothodida
+ */
 $i18n = array(
   // plugin
   'PLUGIN_NAME'    => 'Front Router',
