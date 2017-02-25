@@ -146,11 +146,29 @@ jQuery(function($) {
       var name   = $route.find('.name').val();
 
       if (name.match(text)) {
-        $route.show();
+        showRoute($route);
       } else {
-        $route.hide();
+        hideRoute($route);
       }
     });
+  }
+
+  /**
+   * Shows a route
+   *
+   * @param jQueryObject $route
+   */
+  function showRoute($route) {
+    $route.css({ visibility: 'visible', height: 'auto', float: 'none' });
+  }
+
+  /**
+   * Hides a route
+   *
+   * @param jQueryObject $route
+   */
+  function hideRoute($route) {
+    $route.css({ visibility: 'hidden', height: 0, float: 'right' });
   }
 
   /**
@@ -236,7 +254,7 @@ jQuery(function($) {
   /**
    * Increase/decrease total # routes
    *
-   * @param inc
+   * @param int inc
    */
   function updateRouteCounter(inc) {
     var $counter = $('.total-routes .count');

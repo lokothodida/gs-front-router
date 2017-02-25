@@ -5,9 +5,28 @@
   background: #fff;
 }
 
+.routeform .routes {
+  counter-reset: item;
+  margin: 0 !important;
+}
+
+.routeform .route-container {
+  list-style-type: none;
+  margin: 0;
+}
+
+.routeform .route-container .move-controls::before {
+  display: inline-block;
+  content: "#" counter(item);
+  counter-increment: item;
+  width: 13px;
+  margin: 5px 3px;
+  color: #999999;
+}
+
 .routeform .route-container .move-controls {
   float: left;
-  margin: 10px 0 10px 0;
+  margin: 0 0 10px 0;
   overflow: hidden;
 }
 

@@ -85,9 +85,9 @@ class FrontRouterAdmin {
     </p>
 
     <form method="post" class="routeform">
-      <div class="routes">
+      <ol class="routes">
         <?php foreach ($routes as $route => $callback) self::showRouteForm($route, $callback); ?>
-      </div>
+      </ol>
 
       <!--total routes-->
       <p class="total-routes"><?php FrontRouter::i18n('TOTAL_ROUTES', array('%total%' => '<span class="count">' . count($routes) . '</span>')); ?></p>
@@ -141,7 +141,7 @@ class FrontRouterAdmin {
    */
   private static function showRouteForm($route, $callback) {
     ?>
-    <div class="route-container">
+    <li class="route-container">
       <div class="move-controls">
         <a href="#" class="cancel move-up">&#x25B2;</a>
         <a href="#" class="cancel move-down">&#x25BC;</a>
@@ -165,7 +165,7 @@ class FrontRouterAdmin {
           </div>
         </div>
       </div>
-    </div>
+    </li>
     <?php
   }
 
