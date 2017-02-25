@@ -62,73 +62,71 @@ class FrontRouterAdmin {
 
     <h3 class="floated"><?php FrontRouter::i18n('MANAGE_ROUTES'); ?></h3>
     <nav class="edit-nav clearfix">
-      <a href="#" class="addroute"><?php FrontRouter::i18n('ADD_ROUTE'); ?></a>
+      <p>
+        <!--Add Route-->
+        <a href="#" class="addroute"><?php FrontRouter::i18n('ADD_ROUTE'); ?></a>
+
+        <!--Documentation-->
+        <a href="https://github.com/lokothodida/gs-front-router/wiki/" target="_blank"><?php i18n('SIDE_DOCUMENTATION'); ?></a>
+
+        <!--Live filter-->
+        <?php i18n('FILTER'); ?>:
+        <input type="text" class="_text ac_input filter-routes" style="width:80px" autocomplete="off">
+      </p>
     </nav>
 
-    <form method="post" class="routeform">
-      <div class="routes">
-        <?php foreach ($routes as $route => $callback) self::showRouteForm($route, $callback); ?>
-      </div>
+    <p>
+      <a href="#" class="cancel collapse-all-routes"><?php FrontRouter::i18n('COLLAPSE_ALL_ROUTES'); ?></a>
+      &nbsp;
+      <a href="#" class="cancel expand-all-routes"><?php FrontRouter::i18n('EXPAND_ALL_ROUTES'); ?></a>
+    </p>
 
-      <p id="submit_line">
-        <input type="submit" class="submit" name="save" value="<?php i18n('BTN_SAVECHANGES'); ?>">
-      </p>
+    <form method="post" class="routeform">
+      <ol class="routes">
+        <?php foreach ($routes as $route => $callback) self::showRouteForm($route, $callback); ?>
+      </ol>
+
+      <!--total routes-->
+      <p class="total-routes"><?php FrontRouter::i18n('TOTAL_ROUTES', array('%total%' => '<span class="count">' . count($routes) . '</span>')); ?></p>
+
+      <div class="submit-line">
+        <input type="submit" class="submit save-changes" name="save" value="<?php i18n('BTN_SAVECHANGES'); ?>">
+      </div>
     </form>
 
     <!--route template-->
-    <template class="routetemplate"><?php self::showRouteForm('', ''); ?></template>
+    <?php
+      $exampleAction = implode("\n", array(
+        '<?php',
+        '  // Callback',
+        '  function your_callback() {',
+        '    echo \'Your content\';',
+        '  }',
+        '',
+        '  // Action data',
+        '  return array(',
+        '    \'title\'   => \'Your title\',',
+        '    \'content\' => \'your_callback\',',
+        '  );'
+      ));
+    ?>
+    <template class="routetemplate"><?php self::showRouteForm('', $exampleAction); ?></template>
 
     <!--javascript-->
 
     <!--codemirror-->
     <?php self::showJS('template/js/codemirror/lib/codemirror-compressed.js?v=0.2.0'); ?>
 
-    <!--route ui handler-->
+    <!--route ui i18n-->
     <script type="text/javascript">
-      /* global jQuery, CodeMirror */
-      jQuery(function($) {
-        // Make a Codemirror Instance
-        var makeEditor = function(textarea) {
-          var editor = CodeMirror.fromTextArea(textarea, {
-            lineNumbers: true,
-          });
-        };
+      // I18N Hashes
+      var i18n = {};
 
-        $('.routeform .route textarea').each(function(idx, elem) {
-          makeEditor(elem);
-        });
-
-        // Make routes sortable
-        $('.routeform .routes').sortable({
-          cancel: 'textarea, .CodeMirror, .deleteroute, input',
-        });
-
-        // Add route
-        $('body').on('click', '.addroute', function(evt) {
-          var $template = $($('.routetemplate').html());
-          $('.routes').append($template);
-
-          // Enable CodeMirror on the new textarea
-          makeEditor($template.find('textarea')[0]);
-          $template[0].scrollIntoView();
-
-          evt.preventDefault();
-        });
-
-        // Delete route
-        $('.routeform').on('click', '.deleteroute', function(evt) {
-          var $route = $(evt.target).closest('.route');
-          var route  = $route.find('input').val();
-          var status = confirm(<?php echo json_encode(FrontRouter::i18n_r('DELETE_ROUTE_SURE')); ?>.replace('%route%', route));
-
-          if (status) {
-            $route.remove();
-          }
-
-          evt.preventDefault();
-        });
-      });
+      i18n.DELETE_ROUTE_SURE = <?php echo json_encode(FrontRouter::i18n_r('DELETE_ROUTE_SURE')); ?>;
     </script>
+
+    <!--routes form ui -->
+    <?php self::showJS(FRONTROUTER_JSURL . 'routes_form.js'); ?>
     <?php
   }
 
@@ -140,19 +138,31 @@ class FrontRouterAdmin {
    */
   private static function showRouteForm($route, $callback) {
     ?>
-    <div class="route">
-      <div class="delete">
-        <a href="#" class="deleteroute">&times;</a>
+    <li class="route-container">
+      <div class="move-controls">
+        <a href="#" class="cancel move-up">&#x25B2;</a>
+        <a href="#" class="cancel move-down">&#x25BC;</a>
       </div>
-      <p>
-        <label for="route[]"><?php FrontRouter::i18n('ROUTE'); ?>:</label>
-        <input class="text" name="route[]" value="<?php echo $route; ?>" required/>
-      <p>
-      <p>
-        <label for="route[]"><?php FrontRouter::i18n('ACTION'); ?>:</label>
-        <textarea class="text" name="callback[]"><?php echo $callback; ?></textarea>
-      </p>
-    </div>
+      <div class="route">
+        <div class="delete">
+          <a href="#" class="btn delete-route">&times;</a>
+          <a href="#" class="btn collapse-route"></a>
+        </div>
+        <div class="field">
+          <label for="route[]"><?php FrontRouter::i18n('ROUTE'); ?>:</label>
+          <input class="text name" name="route[]" value="<?php echo $route; ?>" placeholder="your/route/here/" required/>
+        </div>
+        <div class="field">
+          <label for="route[]"><?php FrontRouter::i18n('ACTION'); ?>:</label>
+          <div class="callback">
+            <textarea class="text" name="callback[]"><?php echo $callback; ?></textarea>
+          </div>
+          <div class="callback-hidden collapsed">
+            <p>...</p>
+          </div>
+        </div>
+      </div>
+    </li>
     <?php
   }
 
@@ -189,6 +199,6 @@ class FrontRouterAdmin {
    * @param string $src Link to the file
    */
   private static function showJS($src) {
-    ?><script src="<?php echo $src; ?>"></script><?php
+    ?><script type="text/javascript" src="<?php echo $src; ?>"></script><?php
   }
 }

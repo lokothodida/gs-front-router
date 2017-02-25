@@ -18,9 +18,9 @@ to specific URL structures (without modifying any `.htaccess` files).
 * Build RESTful API services/endpoints (`v0.5.0+`)
 
 # Screenshots
-![screenshot of admin panel](https://cloud.githubusercontent.com/assets/4363863/14022767/31a5b174-f1d9-11e5-9d55-d69679ef82bd.png)
+![screenshot of admin panel](https://cloud.githubusercontent.com/assets/4363863/23332205/a8aa4250-fb6d-11e6-9b73-4e2b219be0e6.png)
 
-![screenshot of successful route](https://cloud.githubusercontent.com/assets/4363863/14022765/3181d7e0-f1d9-11e5-8517-1722c0d1527b.png)
+![screenshot of successful route](https://cloud.githubusercontent.com/assets/4363863/23332204/a8a5b4f6-fb6d-11e6-8e3a-e9ff48e738ab.png)
 
 # Getting Started
 1. Install and enable the plugin.

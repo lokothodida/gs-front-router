@@ -1,10 +1,14 @@
 <?php
-
-// English
+/**
+ * English Language File
+ *
+ * @package FrontRouter
+ * @author lokothodida
+ */
 $i18n = array(
   // plugin
   'PLUGIN_NAME'    => 'Front Router',
-  'PLUGIN_DESC'    => 'Create front-end page routes',
+  'PLUGIN_DESC'    => 'Create routes for front-end pages',
   'MANAGE_ROUTES'  => 'Manage Routes',
 
   // admin
@@ -14,8 +18,11 @@ $i18n = array(
   'INIT_ROUTE_ERROR'      => 'Could not create initial routes file',
   'UPDATE_ROUTES_SUCCESS' => 'Successfully updated routes',
   'UPDATE_ROUTES_ERROR'   => 'Error updating routes',
+  'COLLAPSE_ALL_ROUTES'   => 'Collapse all routes',
+  'EXPAND_ALL_ROUTES'     => 'Expand all routes',
   'ROUTE'                 => 'Route',
   'ACTION'                => 'Action',
   'ADD_ROUTE'             => 'Add Route',
-  'DELETE_ROUTE_SURE'     => 'Are you sure that you want to delete the route "%route%?"',
+  'DELETE_ROUTE_SURE'     => 'Are you sure that you want to delete the route "%route%"?',
+  'TOTAL_ROUTES'          => '%total% total routes',
 );

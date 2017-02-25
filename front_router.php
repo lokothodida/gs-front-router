@@ -8,7 +8,7 @@ register_plugin_front_router();
 function register_plugin_front_router() {
   // Constants
   define('FRONTROUTER', basename(__FILE__, '.php'));
-  define('FRONTROUTER_VERSION', '0.5.0');
+  define('FRONTROUTER_VERSION', '0.6.0');
   define('FRONTROUTER_PLUGINPATH', GSPLUGINPATH . FRONTROUTER . '/');
   define('FRONTROUTER_PHPPATH', FRONTROUTER_PLUGINPATH . 'php/');
 

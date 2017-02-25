@@ -1,6 +1,10 @@
 <?php
-
-// French (Google Translate)
+/**
+ * German Language File (Google Translate)
+ *
+ * @package FrontRouter
+ * @author lokothodida
+ */
 $i18n = array(
   // plugin
   'PLUGIN_NAME'    => 'Routeur Avant',
@@ -14,8 +18,11 @@ $i18n = array(
   'INIT_ROUTE_ERROR'      => 'Impossible de créer le fichier des routes initiales',
   'UPDATE_ROUTES_SUCCESS' => 'Itinéraires avec succès mis à jour',
   'UPDATE_ROUTES_ERROR'   => 'Itinéraires de mise à jour d\'erreur',
+  'COLLAPSE_ALL_ROUTES'   => 'Rétrécir toutes les routes',
+  'EXPAND_ALL_ROUTES'     => 'Ouvrir toutes les routes',
   'ROUTE'                 => 'Route',
   'ACTION'                => 'Action',
   'ADD_ROUTE'             => 'Ajouter Route',
-  'DELETE_ROUTE_SURE'     => 'Etes-vous sûr que vous voulez supprimer l\'itinéraire "%route%?"',
+  'DELETE_ROUTE_SURE'     => 'Etes-vous sûr que vous voulez supprimer l\'itinéraire "%route%"?',
+  'TOTAL_ROUTES'          => '%total% itinéraires au total',
 );
