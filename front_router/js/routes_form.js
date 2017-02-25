@@ -36,7 +36,7 @@ jQuery(function($) {
     createEditor(textarea);
 
     // Scroll the route into view
-    scrollTo($template);
+    scrollTo($template, 500);
 
     evt.preventDefault();
   }
@@ -221,10 +221,10 @@ jQuery(function($) {
    *
    * @param HTMLElement elem
    */
-  function scrollTo(elem) {
+  function scrollTo(elem, delay) {
     $('html, body').animate({
       scrollTop: $(elem).offset().top
-    }, 1000);
+    }, delay);
   }
 
   /**

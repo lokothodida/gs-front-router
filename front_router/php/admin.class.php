@@ -140,8 +140,8 @@ class FrontRouterAdmin {
     ?>
     <div class="route-container">
       <div class="move-controls">
-        <a href="#" class="move-up">&#x25B2;</a>
-        <a href="#" class="move-down">&#x25BC;</a>
+        <a href="#" class="cancel move-up">&#x25B2;</a>
+        <a href="#" class="cancel move-down">&#x25BC;</a>
       </div>
       <div class="route">
         <div class="delete">
