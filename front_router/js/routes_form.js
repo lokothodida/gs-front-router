@@ -30,7 +30,12 @@ jQuery(function($) {
   function addRouteCallback(evt) {
     var $template = getRouteTemplate();
     var textarea  = $template.find('textarea')[0];
+
+    // Add the route
     $('.routes').append($template);
+
+    // Increase counter
+    updateRouteCounter(1);
 
     // Enable CodeMirror on the new textarea
     createEditor(textarea);
@@ -53,6 +58,7 @@ jQuery(function($) {
 
     if (status) {
       $route.remove();
+      updateRouteCounter(-1);
     }
 
     evt.preventDefault();
@@ -225,6 +231,18 @@ jQuery(function($) {
     $('html, body').animate({
       scrollTop: $(elem).offset().top
     }, delay);
+  }
+
+  /**
+   * Increase/decrease total # routes
+   *
+   * @param inc
+   */
+  function updateRouteCounter(inc) {
+    var $counter = $('.total-routes .count');
+    var count = parseInt($counter.html(), 10);
+
+    $counter.html(count + inc);
   }
 
   /**

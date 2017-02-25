@@ -89,6 +89,9 @@ class FrontRouterAdmin {
         <?php foreach ($routes as $route => $callback) self::showRouteForm($route, $callback); ?>
       </div>
 
+      <!--total routes-->
+      <p class="total-routes"><?php FrontRouter::i18n('TOTAL_ROUTES', array('%total%' => '<span class="count">' . count($routes) . '</span>')); ?></p>
+
       <div class="submit-line">
         <input type="submit" class="submit save-changes" name="save" value="<?php i18n('BTN_SAVECHANGES'); ?>">
       </div>

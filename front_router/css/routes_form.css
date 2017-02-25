@@ -54,3 +54,11 @@
   margin: 0 0 0 3px;
   padding: 2px 4px;
 }
+
+.routeform .total-routes {
+  font-style: italic;
+}
+
+.routeform .total-routes .count {
+  font-weight: bold;
+}

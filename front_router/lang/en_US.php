@@ -20,4 +20,5 @@ $i18n = array(
   'ACTION'                => 'Action',
   'ADD_ROUTE'             => 'Add Route',
   'DELETE_ROUTE_SURE'     => 'Are you sure that you want to delete the route "%route%"?',
+  'TOTAL_ROUTES'          => '%total% total routes',
 );
