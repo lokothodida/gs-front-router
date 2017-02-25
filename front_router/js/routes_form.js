@@ -195,7 +195,6 @@ jQuery(function($) {
     var $prev = $container.prev();
 
     if ($prev.length) {
-      $container.remove();
       $prev.before($container);
     }
 
@@ -212,7 +211,6 @@ jQuery(function($) {
     var $next = $container.next();
 
     if ($next.length) {
-      $container.remove();
       $next.after($container);
     }
 
