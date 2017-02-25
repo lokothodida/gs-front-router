@@ -75,6 +75,15 @@ class FrontRouterAdmin {
       </p>
     </nav>
 
+    <p>
+      <a href="#" class="cancel collapse-all-routes">
+        <?php FrontRouter::i18n('COLLAPSE_ALL_ROUTES'); ?>
+      </a>
+      <a href="#" class="cancel expand-all-routes">
+        <?php FrontRouter::i18n('EXPAND_ALL_ROUTES'); ?>
+      </a>
+    </p>
+
     <form method="post" class="routeform">
       <div class="routes">
         <?php foreach ($routes as $route => $callback) self::showRouteForm($route, $callback); ?>
@@ -137,7 +146,7 @@ class FrontRouterAdmin {
         }
 
         function deleteRouteCallback(evt) {
-          var $route = $(evt.target).closest('.route');
+          var $route = $(evt.target).closest('.route-container');
           var route  = $route.find('input').val();
           var status = confirm(<?php echo json_encode(FrontRouter::i18n_r('DELETE_ROUTE_SURE')); ?>.replace('%route%', route));
 
@@ -160,9 +169,39 @@ class FrontRouterAdmin {
           evt.preventDefault();
         }
 
+        function collapseAllRoutes(evt) {
+          var $routes = $('.route');
+
+          $routes.each(function(idx, route) {
+            var $route = $(route);
+            var $button = $route.find('.btn.collapse-route');
+
+            $route.find('.callback').slideUp(200);
+            $route.find('.callback-hidden').removeClass('collapsed');
+            $button.addClass('collapsed');
+          });
+
+          evt.preventDefault();
+        }
+
+        function expandAllRoutes(evt) {
+          var $routes = $('.route');
+
+          $routes.each(function(idx, route) {
+            var $route = $(route);
+            var $button = $route.find('.btn.collapse-route');
+
+            $route.find('.callback').slideDown(200);
+            $route.find('.callback-hidden').addClass('collapsed');
+            $button.removeClass('collapsed');
+          });
+
+          evt.preventDefault();
+        }
+
         function filterRoutesCallback(evt) {
           var text    = evt.target.value;
-          var $routes = $('.routeform .route');
+          var $routes = $('.routeform .route-container');
 
           $routes.each(function(idx, route) {
             var $route = $(route);
@@ -174,6 +213,30 @@ class FrontRouterAdmin {
               $route.hide();
             }
           });
+
+          evt.preventDefault();
+        }
+
+        function moveRouteUpCallback(evt) {
+          var $container = $(evt.target).closest('.route-container');
+          $prev = $container.prev();
+
+          if ($prev.length) {
+            $container.remove();
+            $prev.before($container);
+          }
+
+          evt.preventDefault();
+        }
+
+        function moveRouteDownCallback(evt) {
+          var $container = $(evt.target).closest('.route-container');
+          $next = $container.next();
+
+          if ($next.length) {
+            $container.remove();
+            $next.after($container);
+          }
 
           evt.preventDefault();
         }
@@ -202,27 +265,37 @@ class FrontRouterAdmin {
         }
 
         function init() {
+          var $maincontent = $('#maincontent');
+
           // Initialize editors
-          $('.routeform .route textarea').each(function(idx, textarea) {
+          $maincontent.find('.routeform .route textarea').each(function(idx, textarea) {
             createEditor(textarea);
           });
 
           // Make routes sortable (except for the buttons and inputs)
-          $('.routeform .routes').sortable({
+          $maincontent.find('.routes').sortable({
             cancel: 'label, input, textarea, .CodeMirror, .btn',
           });
 
           // Add route
-          $('#maincontent').on('click', '.addroute', addRouteCallback);
+          $maincontent.on('click', '.addroute', addRouteCallback);
 
           // Collapse route (hide the callback)
-          $('.routeform').on('click', '.collapse-route', collapseRouteCallback);
+          $maincontent.on('click', '.collapse-route', collapseRouteCallback);
 
           // Delete route
-          $('.routeform').on('click', '.delete-route', deleteRouteCallback);
+          $maincontent.on('click', '.delete-route', deleteRouteCallback);
 
           // Filter routes
-          $('#maincontent').on('keyup', '.filter-routes', filterRoutesCallback);
+          $maincontent.on('keyup', '.filter-routes', filterRoutesCallback);
+
+          // Move route up/down
+          $maincontent.on('click', '.move-up', moveRouteUpCallback);
+          $maincontent.on('click', '.move-down', moveRouteDownCallback);
+
+          // Toggle all routes
+          $maincontent.on('click', '.collapse-all-routes', collapseAllRoutes);
+          $maincontent.on('click', '.expand-all-routes', expandAllRoutes);
 
           // Duplicate submit button for sidebar
           createSubmitButtonForSidebar();
@@ -242,22 +315,28 @@ class FrontRouterAdmin {
    */
   private static function showRouteForm($route, $callback) {
     ?>
-    <div class="route">
-      <div class="delete">
-        <a href="#" class="btn delete-route">&times;</a>
-        <a href="#" class="btn collapse-route"></a>
+    <div class="route-container">
+      <div class="move-controls">
+        <a href="#" class="move-up">&#x25B2;</a>
+        <a href="#" class="move-down">&#x25BC;</a>
       </div>
-      <div class="field">
-        <label for="route[]"><?php FrontRouter::i18n('ROUTE'); ?>:</label>
-        <input class="text name" name="route[]" value="<?php echo $route; ?>" placeholder="your/route/here/" required/>
-      </div>
-      <div class="field">
-        <label for="route[]"><?php FrontRouter::i18n('ACTION'); ?>:</label>
-        <div class="callback">
-          <textarea class="text" name="callback[]"><?php echo $callback; ?></textarea>
+      <div class="route">
+        <div class="delete">
+          <a href="#" class="btn delete-route">&times;</a>
+          <a href="#" class="btn collapse-route"></a>
         </div>
-        <div class="callback-hidden collapsed">
-          <p>...</p>
+        <div class="field">
+          <label for="route[]"><?php FrontRouter::i18n('ROUTE'); ?>:</label>
+          <input class="text name" name="route[]" value="<?php echo $route; ?>" placeholder="your/route/here/" required/>
+        </div>
+        <div class="field">
+          <label for="route[]"><?php FrontRouter::i18n('ACTION'); ?>:</label>
+          <div class="callback">
+            <textarea class="text" name="callback[]"><?php echo $callback; ?></textarea>
+          </div>
+          <div class="callback-hidden collapsed">
+            <p>...</p>
+          </div>
         </div>
       </div>
     </div>
