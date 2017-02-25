@@ -76,12 +76,9 @@ class FrontRouterAdmin {
     </nav>
 
     <p>
-      <a href="#" class="cancel collapse-all-routes">
-        <?php FrontRouter::i18n('COLLAPSE_ALL_ROUTES'); ?>
-      </a>
-      <a href="#" class="cancel expand-all-routes">
-        <?php FrontRouter::i18n('EXPAND_ALL_ROUTES'); ?>
-      </a>
+      <a href="#" class="cancel collapse-all-routes"><?php FrontRouter::i18n('COLLAPSE_ALL_ROUTES'); ?></a>
+      &nbsp;
+      <a href="#" class="cancel expand-all-routes"><?php FrontRouter::i18n('EXPAND_ALL_ROUTES'); ?></a>
     </p>
 
     <form method="post" class="routeform">
