@@ -120,6 +120,11 @@ class FrontRouterAdmin {
     <!--route ui handler-->
     <script type="text/javascript">
       /* global jQuery, CodeMirror */
+      // I18N Hashes
+      var i18n = {};
+
+      i18n.DELETE_ROUTE_SURE = <?php echo json_encode(FrontRouter::i18n_r('DELETE_ROUTE_SURE')); ?>;
+
       jQuery(function($) {
         /**
          * Create an editor instance
@@ -170,7 +175,7 @@ class FrontRouterAdmin {
         function deleteRouteCallback(evt) {
           var $route = $(evt.target).closest('.route-container');
           var route  = $route.find('input').val();
-          var status = confirm(<?php echo json_encode(FrontRouter::i18n_r('DELETE_ROUTE_SURE')); ?>.replace('%route%', route));
+          var status = confirm(i18n.DELETE_ROUTE_SURE.replace('%route%', route));
 
           if (status) {
             $route.remove();
