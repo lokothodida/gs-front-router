@@ -49,6 +49,7 @@ GetSimple Front Router is licensed under [MIT](http://www.opensource.org/license
 # Contributors
 * [dimayakovlev](https://github.com/dimayakovlev) - Russian translation, CSS enhancements in 0.4.2
 * [tablatronix](https://github.com/tablatronix) - Enhancements for Version 0.4.0
+* [cnb](https://github.com/cnb/) - Spanish translation
 
 # Copyright
 All rights reserved.
